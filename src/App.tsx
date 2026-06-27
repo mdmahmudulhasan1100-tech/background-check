@@ -21,29 +21,37 @@ export default function App() {
   const [legalModalType, setLegalModalType] = useState<'privacy' | 'terms' | 'affiliate' | null>(null);
 
   useEffect(() => {
-    // Load persisted brand or affiliate config if saved
-    const savedDomain = localStorage.getItem('verify_app_domain');
-    if (savedDomain && DOMAIN_IDEAS.includes(savedDomain)) {
-      setCurrentDomain(savedDomain);
-    }
-    const savedAffiliate = localStorage.getItem('verify_app_affiliate');
-    if (savedAffiliate && savedAffiliate !== 'https://www.whitebridge.com/ref?partner=verify_applicant_portal') {
-      setAffiliateUrl(savedAffiliate);
-    } else {
-      setAffiliateUrl(DEFAULT_AFFILIATE_URL);
-      localStorage.setItem('verify_app_affiliate', DEFAULT_AFFILIATE_URL);
+    // Load persisted brand or affiliate config if saved safely
+    try {
+      const savedDomain = localStorage.getItem('verify_app_domain');
+      if (savedDomain && DOMAIN_IDEAS.includes(savedDomain)) {
+        setCurrentDomain(savedDomain);
+      }
+      const savedAffiliate = localStorage.getItem('verify_app_affiliate');
+      if (savedAffiliate && savedAffiliate !== 'https://www.whitebridge.com/ref?partner=verify_applicant_portal') {
+        setAffiliateUrl(savedAffiliate);
+      } else {
+        setAffiliateUrl(DEFAULT_AFFILIATE_URL);
+        localStorage.setItem('verify_app_affiliate', DEFAULT_AFFILIATE_URL);
+      }
+    } catch (err) {
+      console.warn('Storage access restricted:', err);
     }
   }, []);
 
   const handleDomainChange = (domain: string) => {
     setCurrentDomain(domain);
-    localStorage.setItem('verify_app_domain', domain);
+    try {
+      localStorage.setItem('verify_app_domain', domain);
+    } catch (e) {}
     document.title = `${domain} | Secure Online Background Checks`;
   };
 
   const handleSaveAffiliateUrl = (url: string) => {
     setAffiliateUrl(url);
-    localStorage.setItem('verify_app_affiliate', url);
+    try {
+      localStorage.setItem('verify_app_affiliate', url);
+    } catch (e) {}
   };
 
   const handleStartBackgroundCheck = () => {
