@@ -1,0 +1,6 @@
+{
+  "name": "VerifyApplicant",
+  "description": "Secure online background checks and tenant screening landing page with instant pre-screening flow.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

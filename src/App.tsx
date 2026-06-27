@@ -1,0 +1,117 @@
+import React, { useState, useEffect } from 'react';
+import { Header } from './components/Header';
+import { Hero } from './components/Hero';
+import { HowItWorks } from './components/HowItWorks';
+import { WhoItsFor } from './components/WhoItsFor';
+import { FAQ } from './components/FAQ';
+import { CTASection } from './components/CTASection';
+import { Footer } from './components/Footer';
+import { PreScreeningModal } from './components/PreScreeningModal';
+import { LegalModal } from './components/LegalModal';
+import { SettingsModal } from './components/SettingsModal';
+import { DOMAIN_IDEAS, DEFAULT_AFFILIATE_URL } from './data';
+
+export default function App() {
+  const [currentDomain, setCurrentDomain] = useState<string>(DOMAIN_IDEAS[0]);
+  const [affiliateUrl, setAffiliateUrl] = useState<string>(DEFAULT_AFFILIATE_URL);
+  
+  // Modals state
+  const [preScreenModalOpen, setPreScreenModalOpen] = useState<boolean>(false);
+  const [settingsModalOpen, setSettingsModalOpen] = useState<boolean>(false);
+  const [legalModalType, setLegalModalType] = useState<'privacy' | 'terms' | 'affiliate' | null>(null);
+
+  useEffect(() => {
+    // Load persisted brand or affiliate config if saved
+    const savedDomain = localStorage.getItem('verify_app_domain');
+    if (savedDomain && DOMAIN_IDEAS.includes(savedDomain)) {
+      setCurrentDomain(savedDomain);
+    }
+    const savedAffiliate = localStorage.getItem('verify_app_affiliate');
+    if (savedAffiliate && savedAffiliate !== 'https://www.whitebridge.com/ref?partner=verify_applicant_portal') {
+      setAffiliateUrl(savedAffiliate);
+    } else {
+      setAffiliateUrl(DEFAULT_AFFILIATE_URL);
+      localStorage.setItem('verify_app_affiliate', DEFAULT_AFFILIATE_URL);
+    }
+  }, []);
+
+  const handleDomainChange = (domain: string) => {
+    setCurrentDomain(domain);
+    localStorage.setItem('verify_app_domain', domain);
+    document.title = `${domain} | Secure Online Background Checks`;
+  };
+
+  const handleSaveAffiliateUrl = (url: string) => {
+    setAffiliateUrl(url);
+    localStorage.setItem('verify_app_affiliate', url);
+  };
+
+  const handleStartBackgroundCheck = () => {
+    setPreScreenModalOpen(true);
+  };
+
+  return (
+    <div className="min-h-screen bg-white text-slate-900 flex flex-col selection:bg-blue-100 selection:text-blue-900 font-sans">
+      
+      {/* Top Banner Notice for Affiliate Marketers / Preview */}
+      <div className="bg-slate-900 text-slate-300 px-4 py-2 text-[11px] sm:text-xs text-center border-b border-slate-800 flex items-center justify-center gap-2">
+        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+        <span>Active Preview Brand: <strong className="text-white font-mono">{currentDomain}</strong></span>
+        <span className="hidden sm:inline">•</span>
+        <button 
+          onClick={() => setSettingsModalOpen(true)}
+          className="underline hover:text-white transition-colors cursor-pointer ml-1 font-semibold text-blue-400"
+        >
+          [Edit Affiliate URL]
+        </button>
+      </div>
+
+      {/* Main Header / Navigation */}
+      <Header
+        currentDomain={currentDomain}
+        onDomainChange={handleDomainChange}
+        onStartClick={handleStartBackgroundCheck}
+        onOpenSettings={() => setSettingsModalOpen(true)}
+      />
+
+      {/* Page Content */}
+      <main className="flex-1">
+        <Hero onStartClick={handleStartBackgroundCheck} />
+        <HowItWorks />
+        <WhoItsFor onStartClick={handleStartBackgroundCheck} />
+        <FAQ />
+        <CTASection
+          onStartClick={handleStartBackgroundCheck}
+          affiliateUrl={affiliateUrl}
+        />
+      </main>
+
+      {/* Footer */}
+      <Footer
+        currentDomain={currentDomain}
+        onOpenLegal={(type) => setLegalModalType(type)}
+        onOpenSettings={() => setSettingsModalOpen(true)}
+      />
+
+      {/* Interactive Modals */}
+      <PreScreeningModal
+        isOpen={preScreenModalOpen}
+        onClose={() => setPreScreenModalOpen(false)}
+        affiliateUrl={affiliateUrl}
+      />
+
+      <LegalModal
+        modalType={legalModalType}
+        onClose={() => setLegalModalType(null)}
+      />
+
+      <SettingsModal
+        isOpen={settingsModalOpen}
+        onClose={() => setSettingsModalOpen(false)}
+        currentUrl={affiliateUrl}
+        onSaveUrl={handleSaveAffiliateUrl}
+      />
+
+    </div>
+  );
+}
