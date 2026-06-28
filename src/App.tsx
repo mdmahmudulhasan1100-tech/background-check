@@ -6,7 +6,6 @@ import { WhoItsFor } from './components/WhoItsFor';
 import { FAQ } from './components/FAQ';
 import { CTASection } from './components/CTASection';
 import { Footer } from './components/Footer';
-import { PreScreeningModal } from './components/PreScreeningModal';
 import { LegalModal } from './components/LegalModal';
 import { SettingsModal } from './components/SettingsModal';
 import { DOMAIN_IDEAS, DEFAULT_AFFILIATE_URL } from './data';
@@ -16,7 +15,6 @@ export default function App() {
   const [affiliateUrl, setAffiliateUrl] = useState<string>(DEFAULT_AFFILIATE_URL);
   
   // Modals state
-  const [preScreenModalOpen, setPreScreenModalOpen] = useState<boolean>(false);
   const [settingsModalOpen, setSettingsModalOpen] = useState<boolean>(false);
   const [legalModalType, setLegalModalType] = useState<'privacy' | 'terms' | 'affiliate' | null>(null);
 
@@ -28,7 +26,11 @@ export default function App() {
         setCurrentDomain(savedDomain);
       }
       const savedAffiliate = localStorage.getItem('verify_app_affiliate');
-      if (savedAffiliate && savedAffiliate !== 'https://www.whitebridge.com/ref?partner=verify_applicant_portal') {
+      if (
+        savedAffiliate &&
+        savedAffiliate !== 'https://www.whitebridge.com/ref?partner=verify_applicant_portal' &&
+        savedAffiliate !== 'https://whitebridgefind.com/Pshring'
+      ) {
         setAffiliateUrl(savedAffiliate);
       } else {
         setAffiliateUrl(DEFAULT_AFFILIATE_URL);
@@ -55,25 +57,11 @@ export default function App() {
   };
 
   const handleStartBackgroundCheck = () => {
-    setPreScreenModalOpen(true);
+    window.open(affiliateUrl, '_blank');
   };
 
   return (
     <div className="min-h-screen bg-white text-slate-900 flex flex-col selection:bg-blue-100 selection:text-blue-900 font-sans">
-      
-      {/* Top Banner Notice for Affiliate Marketers / Preview */}
-      <div className="bg-slate-900 text-slate-300 px-4 py-2 text-[11px] sm:text-xs text-center border-b border-slate-800 flex items-center justify-center gap-2">
-        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-        <span>Active Preview Brand: <strong className="text-white font-mono">{currentDomain}</strong></span>
-        <span className="hidden sm:inline">•</span>
-        <button 
-          onClick={() => setSettingsModalOpen(true)}
-          className="underline hover:text-white transition-colors cursor-pointer ml-1 font-semibold text-blue-400"
-        >
-          [Edit Affiliate URL]
-        </button>
-      </div>
-
       {/* Main Header / Navigation */}
       <Header
         currentDomain={currentDomain}
@@ -102,11 +90,6 @@ export default function App() {
       />
 
       {/* Interactive Modals */}
-      <PreScreeningModal
-        isOpen={preScreenModalOpen}
-        onClose={() => setPreScreenModalOpen(false)}
-        affiliateUrl={affiliateUrl}
-      />
 
       <LegalModal
         modalType={legalModalType}
