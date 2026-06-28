@@ -3,14 +3,9 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import {defineConfig} from 'vite';
 
-// Dynamically determine base path for GitHub Pages deployment vs AI Studio
-const isGitHubActions = process.env.GITHUB_ACTIONS === 'true';
-const repoName = process.env.GITHUB_REPOSITORY ? process.env.GITHUB_REPOSITORY.split('/')[1] : '';
-const basepath = isGitHubActions && repoName ? `/${repoName}/` : './';
-
 export default defineConfig(() => {
   return {
-    base: basepath,
+    base: './',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {

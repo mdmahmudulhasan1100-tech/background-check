@@ -31,7 +31,7 @@ export default function App() {
         savedAffiliate !== 'https://www.whitebridge.com/ref?partner=verify_applicant_portal' &&
         savedAffiliate !== 'https://whitebridgefind.com/Pshring'
       ) {
-        setAffiliateUrl(savedAffiliate);
+        setAffiliateUrl(savedAffiliate.replace(/([^:]\/)\/+/g, '$1'));
       } else {
         setAffiliateUrl(DEFAULT_AFFILIATE_URL);
         localStorage.setItem('verify_app_affiliate', DEFAULT_AFFILIATE_URL);
@@ -50,14 +50,20 @@ export default function App() {
   };
 
   const handleSaveAffiliateUrl = (url: string) => {
-    setAffiliateUrl(url);
+    const cleanUrl = url.replace(/([^:]\/)\/+/g, '$1');
+    setAffiliateUrl(cleanUrl);
     try {
-      localStorage.setItem('verify_app_affiliate', url);
+      localStorage.setItem('verify_app_affiliate', cleanUrl);
     } catch (e) {}
   };
 
   const handleStartBackgroundCheck = () => {
-    window.open(affiliateUrl, '_blank');
+    const cleanUrl = affiliateUrl.replace(/([^:]\/)\/+/g, '$1');
+    if (window.self !== window.top) {
+      window.open(cleanUrl, '_blank');
+    } else {
+      window.location.href = cleanUrl;
+    }
   };
 
   return (

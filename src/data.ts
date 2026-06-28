@@ -8,7 +8,7 @@ export const DOMAIN_IDEAS = [
   'BackgroundCheckPortal.com',
 ];
 
-export const DEFAULT_AFFILIATE_URL = 'https://paymaxoffers.trakaff.net//tr?offer_id=12&aff_id=325';
+export const DEFAULT_AFFILIATE_URL = 'https://paymaxoffers.trakaff.net/tr?offer_id=12&aff_id=325';
 
 export const HOW_IT_WORKS_STEPS: StepItem[] = [
   {
