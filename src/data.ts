@@ -127,10 +127,10 @@ export const LEGAL_CONTENTS: Record<'privacy' | 'terms' | 'affiliate', LegalModa
     ],
   },
   affiliate: {
-    title: 'Affiliate & Partner Disclosure',
+    title: 'Referral & Partner Disclosure',
     lastUpdated: 'June 2026',
     content: [
-      'FTC Affiliate Disclosure: In compliance with Federal Trade Commission (FTC) guidelines, please assume that any links leading to third-party background check providers or screening services on this website are affiliate or referral links.',
+      'FTC Referral Disclosure: In compliance with Federal Trade Commission (FTC) guidelines, please assume that any links leading to third-party background check providers or screening services on this website are partner or referral links.',
       'Referral Compensation: When you click our "Start Background Check" buttons and purchase screening services through our authorized partner portals (such as Whitebridge or affiliated screening networks), this site operator may receive a financial referral fee or commission at no additional cost to you.',
       'Independence & Integrity: Our editorial recommendations and portal structure are designed to connect property owners, employers, and applicants with reputable, secure, FCRA-compliant screening technology. Compensation does not influence the security standards required of our listed partners.',
     ],

@@ -103,7 +103,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={onOpenSettings}
               className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-lg transition-colors"
-              title="Configure Affiliate Destination URL"
+              title="Configure Portal Destination URL"
             >
               <Settings className="w-5 h-5" />
             </button>
@@ -123,7 +123,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={onOpenSettings}
               className="p-2 text-slate-400 hover:text-slate-600 rounded-lg"
-              title="Affiliate Link Settings"
+              title="Portal Settings"
             >
               <Settings className="w-5 h-5" />
             </button>

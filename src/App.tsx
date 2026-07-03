@@ -46,7 +46,7 @@ export default function App() {
     try {
       localStorage.setItem('verify_app_domain', domain);
     } catch (e) {}
-    document.title = `${domain} | Secure Online Background Checks`;
+    document.title = `${domain} | Rental Online Background checks`;
   };
 
   const handleSaveAffiliateUrl = (url: string) => {

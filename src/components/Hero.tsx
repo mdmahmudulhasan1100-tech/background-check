@@ -23,7 +23,7 @@ export const Hero: React.FC<HeroProps> = ({ onStartClick }) => {
 
           {/* Headline */}
           <h1 className="text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.1] mb-6 font-display">
-            Secure Online <span className="text-blue-600 underline decoration-blue-200 decoration-4 underline-offset-8">Background Checks</span>
+            Rental Online <span className="text-blue-600 underline decoration-blue-200 decoration-4 underline-offset-8">Background checks</span>
           </h1>
 
           {/* Short Description */}

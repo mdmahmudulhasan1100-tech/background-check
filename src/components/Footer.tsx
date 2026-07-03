@@ -66,7 +66,7 @@ export const Footer: React.FC<FooterProps> = ({
                   onClick={() => onOpenLegal('affiliate')}
                   className="hover:text-blue-400 text-slate-300 transition-colors cursor-pointer text-left focus:outline-hidden font-medium"
                 >
-                  Affiliate Disclosure
+                  Partner Disclosure
                 </button>
               </li>
               <li>
@@ -106,7 +106,7 @@ export const Footer: React.FC<FooterProps> = ({
                   className="inline-flex items-center gap-1.5 text-xs text-blue-400 hover:text-blue-300 bg-blue-950/50 px-2.5 py-1.5 rounded-lg border border-blue-900/50 transition-colors cursor-pointer"
                 >
                   <Settings className="w-3.5 h-3.5" />
-                  <span>Configure Affiliate Link</span>
+                  <span>Configure Portal Destination Link</span>
                 </button>
               </li>
             </ul>
@@ -114,11 +114,11 @@ export const Footer: React.FC<FooterProps> = ({
 
         </div>
 
-        {/* Affiliate Agreement Required Disclosure Box */}
+        {/* Referral & Partner Disclosure Box */}
         <div className="py-8 border-b border-slate-900 text-xs text-slate-500 leading-relaxed bg-slate-900/40 px-6 my-6 rounded-2xl border border-slate-800/60">
-          <p className="font-semibold text-slate-400 mb-1">Affiliate Referral Disclosure & FCRA Notice:</p>
+          <p className="font-semibold text-slate-400 mb-1">Referral Disclosure & FCRA Notice:</p>
           <p>
-            {currentDomain} operates as an independent marketing affiliate and referral portal. We do not directly assemble consumer reports, perform courthouse lookups, or act as a Consumer Reporting Agency (CRA) under the Fair Credit Reporting Act. When you initiate screening via our "Start Background Check" buttons, you are transferred securely to an authorized accredited third-party screening provider (such as Whitebridge or authorized screening networks). This site operator may receive referral compensation for screening purchases made through partner links. All report accuracy, dispute handling, and compliance responsibilities reside exclusively with the accredited partner CRA.
+            {currentDomain} operates as an independent referral portal. We do not directly assemble consumer reports, perform courthouse lookups, or act as a Consumer Reporting Agency (CRA) under the Fair Credit Reporting Act. When you initiate screening via our "Start Background Check" buttons, you are transferred securely to an authorized accredited third-party screening provider (such as Whitebridge or authorized screening networks). This site operator may receive referral compensation for screening purchases made through partner links. All report accuracy, dispute handling, and compliance responsibilities reside exclusively with the accredited partner CRA.
           </p>
         </div>
 

@@ -25,7 +25,7 @@ export const CTASection: React.FC<CTASectionProps> = ({ onStartClick, affiliateU
             </div>
 
             <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight mb-6 font-display">
-              Ready to Run a Secure Online Background Check?
+              Ready to Run Rental Online Background checks?
             </h2>
 
             <p className="text-base sm:text-xl text-slate-300 leading-relaxed mb-10 max-w-2xl mx-auto">

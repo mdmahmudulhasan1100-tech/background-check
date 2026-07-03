@@ -60,7 +60,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           </div>
           <div>
             <h3 className="text-xl font-bold text-slate-900 font-display">
-              Affiliate Destination Configuration
+              Portal Settings
             </h3>
             <p className="text-xs text-slate-500 font-medium">
               Link Call-to-Action Buttons to Your Partner Link
@@ -70,14 +70,14 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
         <form onSubmit={handleSave} className="space-y-5">
           <div className="bg-blue-50/80 p-4 rounded-2xl border border-blue-100 text-xs text-blue-800 leading-relaxed">
-            <span className="font-bold block mb-1">Affiliate Integration Guide:</span>
-            Paste your approved partner screening affiliate link (e.g. Whitebridge partner URL or screening network deep link). All primary "Start Background Check" buttons across the landing page and qualification modal will route prospective tenants and candidates to this exact URL.
+            <span className="font-bold block mb-1">Partner Integration Guide:</span>
+            Paste your approved partner screening link (e.g. Whitebridge partner URL or screening network deep link). All primary "Start Background Check" buttons across the landing page and qualification modal will route prospective tenants and candidates to this exact URL.
           </div>
 
           <div>
             <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-2 flex items-center gap-1.5">
               <LinkIcon className="w-3.5 h-3.5 text-blue-600" />
-              <span>Destination Affiliate URL</span>
+              <span>Destination Partner URL</span>
             </label>
             <input
               type="url"
@@ -92,7 +92,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
           {savedSuccess && (
             <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold flex items-center gap-2 animate-in fade-in duration-200">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>Affiliate destination saved successfully! Primary CTA buttons updated.</span>
+              <span>Partner destination saved successfully! Primary CTA buttons updated.</span>
             </div>
           )}
 
