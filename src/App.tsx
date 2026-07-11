@@ -8,23 +8,29 @@ import { CTASection } from './components/CTASection';
 import { Footer } from './components/Footer';
 import { LegalModal } from './components/LegalModal';
 import { SettingsModal } from './components/SettingsModal';
-import { DOMAIN_IDEAS, DEFAULT_AFFILIATE_URL } from './data';
+import { TransUnionCreditCheck } from './components/TransUnionCreditCheck';
+import { DOMAIN_IDEAS, DEFAULT_AFFILIATE_URL, DEFAULT_TRANSUNION_URL } from './data';
 
 export default function App() {
   const [currentDomain, setCurrentDomain] = useState<string>(DOMAIN_IDEAS[0]);
   const [affiliateUrl, setAffiliateUrl] = useState<string>(DEFAULT_AFFILIATE_URL);
+  const [transunionUrl, setTransunionUrl] = useState<string>(DEFAULT_TRANSUNION_URL);
   
+  // Navigation
+  const [activePage, setActivePage] = useState<'background-check' | 'transunion-credit-check'>('background-check');
+
   // Modals state
   const [settingsModalOpen, setSettingsModalOpen] = useState<boolean>(false);
   const [legalModalType, setLegalModalType] = useState<'privacy' | 'terms' | 'affiliate' | null>(null);
 
   useEffect(() => {
-    // Load persisted brand or affiliate config if saved safely
+    // Load persisted brand or affiliate configs
     try {
       const savedDomain = localStorage.getItem('verify_app_domain');
       if (savedDomain && DOMAIN_IDEAS.includes(savedDomain)) {
         setCurrentDomain(savedDomain);
       }
+      
       const savedAffiliate = localStorage.getItem('verify_app_affiliate');
       if (
         savedAffiliate &&
@@ -36,29 +42,79 @@ export default function App() {
         setAffiliateUrl(DEFAULT_AFFILIATE_URL);
         localStorage.setItem('verify_app_affiliate', DEFAULT_AFFILIATE_URL);
       }
+
+      const savedTransunion = localStorage.getItem('verify_app_transunion');
+      if (savedTransunion) {
+        setTransunionUrl(savedTransunion.replace(/([^:]\/)\/+/g, '$1'));
+      } else {
+        setTransunionUrl(DEFAULT_TRANSUNION_URL);
+        localStorage.setItem('verify_app_transunion', DEFAULT_TRANSUNION_URL);
+      }
     } catch (err) {
       console.warn('Storage access restricted:', err);
     }
   }, []);
+
+  // Hash-based client side routing
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash === '#credit-check') {
+        setActivePage('transunion-credit-check');
+        document.title = `${currentDomain} | TransUnion Credit Check`;
+      } else {
+        setActivePage('background-check');
+        document.title = `${currentDomain} | Rental Online Background checks`;
+      }
+    };
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, [currentDomain]);
 
   const handleDomainChange = (domain: string) => {
     setCurrentDomain(domain);
     try {
       localStorage.setItem('verify_app_domain', domain);
     } catch (e) {}
-    document.title = `${domain} | Rental Online Background checks`;
+    if (activePage === 'transunion-credit-check') {
+      document.title = `${domain} | TransUnion Credit Check`;
+    } else {
+      document.title = `${domain} | Rental Online Background checks`;
+    }
   };
 
-  const handleSaveAffiliateUrl = (url: string) => {
-    const cleanUrl = url.replace(/([^:]\/)\/+/g, '$1');
-    setAffiliateUrl(cleanUrl);
+  const handleChangePage = (page: 'background-check' | 'transunion-credit-check') => {
+    if (page === 'transunion-credit-check') {
+      window.location.hash = '#credit-check';
+    } else {
+      window.location.hash = '';
+    }
+  };
+
+  const handleSaveUrls = (bgUrl: string, tuUrl: string) => {
+    const cleanBg = bgUrl.replace(/([^:]\/)\/+/g, '$1');
+    const cleanTu = tuUrl.replace(/([^:]\/)\/+/g, '$1');
+    setAffiliateUrl(cleanBg);
+    setTransunionUrl(cleanTu);
     try {
-      localStorage.setItem('verify_app_affiliate', cleanUrl);
+      localStorage.setItem('verify_app_affiliate', cleanBg);
+      localStorage.setItem('verify_app_transunion', cleanTu);
     } catch (e) {}
   };
 
   const handleStartBackgroundCheck = () => {
     const cleanUrl = affiliateUrl.replace(/([^:]\/)\/+/g, '$1');
+    if (window.self !== window.top) {
+      window.open(cleanUrl, '_blank');
+    } else {
+      window.location.href = cleanUrl;
+    }
+  };
+
+  const handleStartCreditCheck = () => {
+    const cleanUrl = transunionUrl.replace(/([^:]\/)\/+/g, '$1');
     if (window.self !== window.top) {
       window.open(cleanUrl, '_blank');
     } else {
@@ -72,20 +128,31 @@ export default function App() {
       <Header
         currentDomain={currentDomain}
         onDomainChange={handleDomainChange}
-        onStartClick={handleStartBackgroundCheck}
+        onStartClick={activePage === 'transunion-credit-check' ? handleStartCreditCheck : handleStartBackgroundCheck}
         onOpenSettings={() => setSettingsModalOpen(true)}
+        activePage={activePage}
+        onChangePage={handleChangePage}
       />
 
       {/* Page Content */}
       <main className="flex-1">
-        <Hero onStartClick={handleStartBackgroundCheck} />
-        <HowItWorks />
-        <WhoItsFor onStartClick={handleStartBackgroundCheck} />
-        <FAQ />
-        <CTASection
-          onStartClick={handleStartBackgroundCheck}
-          affiliateUrl={affiliateUrl}
-        />
+        {activePage === 'transunion-credit-check' ? (
+          <TransUnionCreditCheck 
+            onStartClick={handleStartCreditCheck}
+            transunionUrl={transunionUrl}
+          />
+        ) : (
+          <>
+            <Hero onStartClick={handleStartBackgroundCheck} />
+            <HowItWorks />
+            <WhoItsFor onStartClick={handleStartBackgroundCheck} />
+            <FAQ />
+            <CTASection
+              onStartClick={handleStartBackgroundCheck}
+              affiliateUrl={affiliateUrl}
+            />
+          </>
+        )}
       </main>
 
       {/* Footer */}
@@ -106,7 +173,8 @@ export default function App() {
         isOpen={settingsModalOpen}
         onClose={() => setSettingsModalOpen(false)}
         currentUrl={affiliateUrl}
-        onSaveUrl={handleSaveAffiliateUrl}
+        transunionUrl={transunionUrl}
+        onSaveUrls={handleSaveUrls}
       />
 
     </div>

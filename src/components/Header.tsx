@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShieldCheck, Menu, X, Settings, ChevronDown, ExternalLink } from 'lucide-react';
+import { ShieldCheck, Menu, X, Settings, ChevronDown, ExternalLink, CreditCard, ClipboardCheck } from 'lucide-react';
 import { DOMAIN_IDEAS } from '../data';
 
 interface HeaderProps {
@@ -7,6 +7,8 @@ interface HeaderProps {
   onDomainChange: (domain: string) => void;
   onStartClick: () => void;
   onOpenSettings: () => void;
+  activePage: 'background-check' | 'transunion-credit-check';
+  onChangePage: (page: 'background-check' | 'transunion-credit-check') => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -14,6 +16,8 @@ export const Header: React.FC<HeaderProps> = ({
   onDomainChange,
   onStartClick,
   onOpenSettings,
+  activePage,
+  onChangePage,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [domainDropdownOpen, setDomainDropdownOpen] = useState(false);
@@ -25,7 +29,11 @@ export const Header: React.FC<HeaderProps> = ({
           
           {/* Brand & Logo */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
+            <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-white shadow-md transition-all ${
+              activePage === 'transunion-credit-check' 
+                ? 'bg-teal-600 shadow-teal-500/20' 
+                : 'bg-blue-600 shadow-blue-500/20'
+            }`}>
               <ShieldCheck className="w-6 h-6" />
             </div>
             
@@ -76,33 +84,37 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           </div>
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-8">
-            <a 
-              href="#how-it-works" 
-              className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors"
+          {/* Desktop Navigation Switcher */}
+          <nav className="hidden md:flex items-center bg-slate-100/80 p-1 rounded-2xl border border-slate-200/50">
+            <button
+              onClick={() => onChangePage('background-check')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                activePage === 'background-check'
+                  ? 'bg-white text-blue-600 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
             >
-              How It Works
-            </a>
-            <a 
-              href="#who-its-for" 
-              className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors"
+              <ClipboardCheck className="w-3.5 h-3.5" />
+              <span>Rental Background Checks</span>
+            </button>
+            <button
+              onClick={() => onChangePage('transunion-credit-check')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                activePage === 'transunion-credit-check'
+                  ? 'bg-white text-teal-600 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
             >
-              Who It's For
-            </a>
-            <a 
-              href="#faq" 
-              className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors"
-            >
-              FAQ
-            </a>
+              <CreditCard className="w-3.5 h-3.5" />
+              <span>TransUnion® Credit Check</span>
+            </button>
           </nav>
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-3">
             <button
               onClick={onOpenSettings}
-              className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-lg transition-colors"
+              className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-lg transition-colors cursor-pointer"
               title="Configure Portal Destination URL"
             >
               <Settings className="w-5 h-5" />
@@ -111,9 +123,17 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               onClick={onStartClick}
               id="header-start-btn"
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-2.5 rounded-xl text-sm transition-all shadow-sm hover:shadow-md hover:shadow-blue-500/20 active:scale-[0.98] flex items-center gap-2 cursor-pointer"
+              className={`font-semibold px-5 py-2.5 rounded-xl text-sm transition-all shadow-sm hover:shadow-md active:scale-[0.98] flex items-center gap-2 cursor-pointer text-white ${
+                activePage === 'transunion-credit-check'
+                  ? 'bg-teal-600 hover:bg-teal-700 hover:shadow-teal-500/20'
+                  : 'bg-blue-600 hover:bg-blue-700 hover:shadow-blue-500/20'
+              }`}
             >
-              <span>Start Background Check</span>
+              <span>
+                {activePage === 'transunion-credit-check' 
+                  ? 'Start Credit Check' 
+                  : 'Start Background Check'}
+              </span>
               <ExternalLink className="w-4 h-4 opacity-80" />
             </button>
           </div>
@@ -122,14 +142,14 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="flex items-center gap-2 md:hidden">
             <button
               onClick={onOpenSettings}
-              className="p-2 text-slate-400 hover:text-slate-600 rounded-lg"
+              className="p-2 text-slate-400 hover:text-slate-600 rounded-lg cursor-pointer"
               title="Portal Settings"
             >
               <Settings className="w-5 h-5" />
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-slate-600 hover:bg-slate-50 rounded-lg"
+              className="p-2 text-slate-600 hover:bg-slate-50 rounded-lg cursor-pointer"
               aria-label="Toggle Navigation"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -141,29 +161,39 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-b border-slate-100 px-4 pt-3 pb-6 space-y-4 shadow-lg">
-          <nav className="flex flex-col space-y-3 pt-2">
-            <a
-              href="#how-it-works"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-slate-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-slate-50"
+        <div className="md:hidden bg-white border-b border-slate-100 px-4 pt-3 pb-6 space-y-4 shadow-lg animate-in fade-in slide-in-from-top-4 duration-200">
+          <div className="px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+            Select Portal Service
+          </div>
+          <nav className="flex flex-col space-y-2">
+            <button
+              onClick={() => {
+                onChangePage('background-check');
+                setMobileMenuOpen(false);
+              }}
+              className={`w-full text-left flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm font-bold transition-all cursor-pointer ${
+                activePage === 'background-check'
+                  ? 'bg-blue-50/70 text-blue-600'
+                  : 'text-slate-700 hover:bg-slate-50'
+              }`}
             >
-              How It Works
-            </a>
-            <a
-              href="#who-its-for"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-slate-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-slate-50"
+              <ClipboardCheck className="w-4 h-4 shrink-0" />
+              <span>Rental Background Checks</span>
+            </button>
+            <button
+              onClick={() => {
+                onChangePage('transunion-credit-check');
+                setMobileMenuOpen(false);
+              }}
+              className={`w-full text-left flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm font-bold transition-all cursor-pointer ${
+                activePage === 'transunion-credit-check'
+                  ? 'bg-teal-50/70 text-teal-600'
+                  : 'text-slate-700 hover:bg-slate-50'
+              }`}
             >
-              Who It's For
-            </a>
-            <a
-              href="#faq"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-medium text-slate-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-slate-50"
-            >
-              Frequently Asked Questions
-            </a>
+              <CreditCard className="w-4 h-4 shrink-0" />
+              <span>TransUnion® Credit Check</span>
+            </button>
           </nav>
           
           <div className="pt-2 px-3">
@@ -173,9 +203,17 @@ export const Header: React.FC<HeaderProps> = ({
                 onStartClick();
               }}
               id="mobile-header-start-btn"
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-xl text-center flex items-center justify-center gap-2 shadow-sm"
+              className={`w-full text-white font-semibold py-3 px-4 rounded-xl text-center flex items-center justify-center gap-2 shadow-sm ${
+                activePage === 'transunion-credit-check'
+                  ? 'bg-teal-600 hover:bg-teal-700'
+                  : 'bg-blue-600 hover:bg-blue-700'
+              }`}
             >
-              <span>Start Background Check</span>
+              <span>
+                {activePage === 'transunion-credit-check'
+                  ? 'Start Credit Check'
+                  : 'Start Background Check'}
+              </span>
               <ExternalLink className="w-4 h-4 opacity-80" />
             </button>
           </div>

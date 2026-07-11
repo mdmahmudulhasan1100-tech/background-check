@@ -1,32 +1,47 @@
-import React, { useState } from 'react';
-import { X, Settings, Link as LinkIcon, CheckCircle2, RotateCcw, ShieldAlert } from 'lucide-react';
-import { DEFAULT_AFFILIATE_URL } from '../data';
+import React, { useState, useEffect } from 'react';
+import { X, Settings, Link as LinkIcon, CheckCircle2, RotateCcw, ShieldCheck } from 'lucide-react';
+import { DEFAULT_AFFILIATE_URL, DEFAULT_TRANSUNION_URL } from '../data';
 
 interface SettingsModalProps {
   isOpen: boolean;
   onClose: () => void;
   currentUrl: string;
-  onSaveUrl: (url: string) => void;
+  transunionUrl: string;
+  onSaveUrls: (backgroundUrl: string, transunionUrl: string) => void;
 }
 
 export const SettingsModal: React.FC<SettingsModalProps> = ({
   isOpen,
   onClose,
   currentUrl,
-  onSaveUrl,
+  transunionUrl,
+  onSaveUrls,
 }) => {
   const [inputUrl, setInputUrl] = useState(currentUrl);
+  const [inputTransunionUrl, setInputTransunionUrl] = useState(transunionUrl);
   const [savedSuccess, setSavedSuccess] = useState(false);
+
+  // Sync states when modal opens or props change
+  useEffect(() => {
+    if (isOpen) {
+      setInputUrl(currentUrl);
+      setInputTransunionUrl(transunionUrl);
+    }
+  }, [isOpen, currentUrl, transunionUrl]);
 
   if (!isOpen) return null;
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputUrl || !inputUrl.startsWith('http')) {
-      alert('Please enter a valid URL starting with http:// or https://');
+      alert('Please enter a valid Background Check URL starting with http:// or https://');
       return;
     }
-    onSaveUrl(inputUrl);
+    if (!inputTransunionUrl || !inputTransunionUrl.startsWith('http')) {
+      alert('Please enter a valid TransUnion Credit Check URL starting with http:// or https://');
+      return;
+    }
+    onSaveUrls(inputUrl, inputTransunionUrl);
     setSavedSuccess(true);
     setTimeout(() => {
       setSavedSuccess(false);
@@ -36,6 +51,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
   const handleReset = () => {
     setInputUrl(DEFAULT_AFFILIATE_URL);
+    setInputTransunionUrl(DEFAULT_TRANSUNION_URL);
   };
 
   return (
@@ -63,7 +79,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               Portal Settings
             </h3>
             <p className="text-xs text-slate-500 font-medium">
-              Link Call-to-Action Buttons to Your Partner Link
+              Link Call-to-Action Buttons to Your Tracking Links
             </p>
           </div>
         </div>
@@ -71,13 +87,14 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
         <form onSubmit={handleSave} className="space-y-5">
           <div className="bg-blue-50/80 p-4 rounded-2xl border border-blue-100 text-xs text-blue-800 leading-relaxed">
             <span className="font-bold block mb-1">Partner Integration Guide:</span>
-            Paste your approved partner screening link (e.g. Whitebridge partner URL or screening network deep link). All primary "Start Background Check" buttons across the landing page and qualification modal will route prospective tenants and candidates to this exact URL.
+            Paste your approved tracking URLs below. Buttons across each page will route users securely to their respective partner screening networks.
           </div>
 
+          {/* Background Check URL */}
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-2 flex items-center gap-1.5">
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2 flex items-center gap-1.5">
               <LinkIcon className="w-3.5 h-3.5 text-blue-600" />
-              <span>Destination Partner URL</span>
+              <span>Rental Background Check Link</span>
             </label>
             <input
               type="url"
@@ -89,10 +106,26 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             />
           </div>
 
+          {/* TransUnion Credit Check URL */}
+          <div>
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2 flex items-center gap-1.5">
+              <LinkIcon className="w-3.5 h-3.5 text-teal-600" />
+              <span>TransUnion Credit Check Link</span>
+            </label>
+            <input
+              type="url"
+              required
+              value={inputTransunionUrl}
+              onChange={(e) => setInputTransunionUrl(e.target.value)}
+              placeholder="https://paymaxoffers.trakaff.net/tr?..."
+              className="w-full px-4 py-3 rounded-xl border border-slate-200 font-mono text-xs text-slate-900 bg-slate-50 focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-teal-600 transition-all"
+            />
+          </div>
+
           {savedSuccess && (
             <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-semibold flex items-center gap-2 animate-in fade-in duration-200">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>Partner destination saved successfully! Primary CTA buttons updated.</span>
+              <span>Tracking URLs saved successfully! Landing pages updated.</span>
             </div>
           )}
 
@@ -101,10 +134,10 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               type="button"
               onClick={handleReset}
               className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-slate-700 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
-              title="Restore default sample partner URL"
+              title="Restore default sample partner URLs"
             >
               <RotateCcw className="w-3.5 h-3.5" />
-              <span>Reset Sample Link</span>
+              <span>Reset Sample Links</span>
             </button>
 
             <div className="flex gap-2.5">
@@ -120,7 +153,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 id="save-settings-btn"
                 className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold shadow-md shadow-blue-600/25 transition-all cursor-pointer"
               >
-                Save Tracking Link
+                Save Tracking Links
               </button>
             </div>
           </div>
