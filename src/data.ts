@@ -11,6 +11,7 @@ export const DOMAIN_IDEAS = [
 export const DEFAULT_AFFILIATE_URL = 'https://paymaxoffers.trakaff.net/tr?offer_id=12&aff_id=325';
 export const DEFAULT_TRANSUNION_URL = 'https://afflat3a1.com/trk/lnk/33458113-9474-49C2-8026-A4D58D51C192/?o=19113&c=918277&a=746358&k=219C57ADAAE5E898DABFCD27326EEA3E&l=20195&s1=AR_Pshring';
 export const DEFAULT_RELIABLE_CREDIT_URL = 'https://paymaxoffers.trakaff.net/tr?offer_id=194&aff_id=325';
+export const DEFAULT_TRUTHFINDER_URL = 'https://paymaxoffers.trakaff.net/tr?offer_id=200&aff_id=325';
 
 export const HOW_IT_WORKS_STEPS: StepItem[] = [
   {

@@ -176,7 +176,7 @@ export const PreScreeningModal: React.FC<PreScreeningModalProps> = ({
 
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5">
-                Applicant Email Address <span className="text-red-500">*</span>
+                Applicant Email Address <span className="text-amber-500">*</span>
               </label>
               <input
                 type="email"
@@ -206,7 +206,7 @@ export const PreScreeningModal: React.FC<PreScreeningModalProps> = ({
             </div>
 
             {error && (
-              <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-xs flex items-center gap-2">
+              <div className="p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-700 text-xs flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{error}</span>
               </div>

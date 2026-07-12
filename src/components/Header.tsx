@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShieldCheck, Menu, X, Settings, ChevronDown, ExternalLink, CreditCard, ClipboardCheck, Sparkles } from 'lucide-react';
+import { ShieldCheck, Menu, X, Settings, ChevronDown, ExternalLink, CreditCard, ClipboardCheck, Sparkles, Search } from 'lucide-react';
 import { DOMAIN_IDEAS } from '../data';
 
 interface HeaderProps {
@@ -7,8 +7,8 @@ interface HeaderProps {
   onDomainChange: (domain: string) => void;
   onStartClick: () => void;
   onOpenSettings: () => void;
-  activePage: 'background-check' | 'transunion-credit-check' | 'reliable-credit-score';
-  onChangePage: (page: 'background-check' | 'transunion-credit-check' | 'reliable-credit-score') => void;
+  activePage: 'background-check' | 'reliable-credit-score' | 'truthfinder-search';
+  onChangePage: (page: 'background-check' | 'reliable-credit-score' | 'truthfinder-search') => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -24,10 +24,10 @@ export const Header: React.FC<HeaderProps> = ({
 
   const getThemeColors = () => {
     switch (activePage) {
-      case 'transunion-credit-check':
-        return 'bg-teal-600 shadow-teal-500/20 text-white hover:bg-teal-700';
       case 'reliable-credit-score':
         return 'bg-blue-600 shadow-blue-500/20 text-white hover:bg-blue-700';
+      case 'truthfinder-search':
+        return 'bg-sky-600 shadow-sky-500/20 text-white hover:bg-sky-700';
       default:
         return 'bg-blue-600 shadow-blue-500/20 text-white hover:bg-blue-700';
     }
@@ -41,8 +41,8 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Brand & Logo */}
           <div className="flex items-center gap-3">
             <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-white shadow-md transition-all ${
-              activePage === 'transunion-credit-check' 
-                ? 'bg-teal-600 shadow-teal-500/20' 
+              activePage === 'truthfinder-search'
+                ? 'bg-sky-600 shadow-sky-500/20'
                 : 'bg-blue-600 shadow-blue-500/20'
             }`}>
               <ShieldCheck className="w-6 h-6" />
@@ -109,17 +109,6 @@ export const Header: React.FC<HeaderProps> = ({
               <span>Rental Background Checks</span>
             </button>
             <button
-              onClick={() => onChangePage('transunion-credit-check')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                activePage === 'transunion-credit-check'
-                  ? 'bg-white text-teal-600 shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              <CreditCard className="w-3.5 h-3.5" />
-              <span>TransUnion® Credit Check</span>
-            </button>
-            <button
               onClick={() => onChangePage('reliable-credit-score')}
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                 activePage === 'reliable-credit-score'
@@ -128,7 +117,18 @@ export const Header: React.FC<HeaderProps> = ({
               }`}
             >
               <Sparkles className="w-3.5 h-3.5 text-amber-500 animate-pulse" />
-              <span>$1 Trial Credit Score</span>
+              <span>Access $1 Credit report</span>
+            </button>
+            <button
+              onClick={() => onChangePage('truthfinder-search')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                activePage === 'truthfinder-search'
+                  ? 'bg-white text-sky-600 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <Search className="w-3.5 h-3.5 text-sky-500" />
+              <span>Truth Finder Search</span>
             </button>
           </nav>
 
@@ -146,16 +146,16 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={onStartClick}
               id="header-start-btn"
               className={`font-semibold px-5 py-2.5 rounded-xl text-sm transition-all shadow-sm hover:shadow-md active:scale-[0.98] flex items-center gap-2 cursor-pointer text-white ${
-                activePage === 'transunion-credit-check'
-                  ? 'bg-teal-600 hover:bg-teal-700 hover:shadow-teal-500/20'
+                activePage === 'truthfinder-search'
+                  ? 'bg-sky-600 hover:bg-sky-700 hover:shadow-sky-500/20'
                   : 'bg-blue-600 hover:bg-blue-700 hover:shadow-blue-500/20'
               }`}
             >
               <span>
-                {activePage === 'transunion-credit-check' 
-                  ? 'Start Credit Check' 
-                  : activePage === 'reliable-credit-score'
-                  ? 'Access $1 Trial'
+                {activePage === 'reliable-credit-score'
+                  ? 'Access $1 Credit report'
+                  : activePage === 'truthfinder-search'
+                  ? 'Truth Finder Search'
                   : 'Start Background Check'}
               </span>
               <ExternalLink className="w-4 h-4 opacity-80" />
@@ -206,20 +206,6 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
             <button
               onClick={() => {
-                onChangePage('transunion-credit-check');
-                setMobileMenuOpen(false);
-              }}
-              className={`w-full text-left flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm font-bold transition-all cursor-pointer ${
-                activePage === 'transunion-credit-check'
-                  ? 'bg-teal-50/70 text-teal-600'
-                  : 'text-slate-700 hover:bg-slate-50'
-              }`}
-            >
-              <CreditCard className="w-4 h-4 shrink-0" />
-              <span>TransUnion® Credit Check</span>
-            </button>
-            <button
-              onClick={() => {
                 onChangePage('reliable-credit-score');
                 setMobileMenuOpen(false);
               }}
@@ -230,7 +216,21 @@ export const Header: React.FC<HeaderProps> = ({
               }`}
             >
               <Sparkles className="w-4 h-4 shrink-0 text-amber-500 animate-pulse" />
-              <span>$1 Trial Credit Score</span>
+              <span>Access $1 Credit report</span>
+            </button>
+            <button
+              onClick={() => {
+                onChangePage('truthfinder-search');
+                setMobileMenuOpen(false);
+              }}
+              className={`w-full text-left flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm font-bold transition-all cursor-pointer ${
+                activePage === 'truthfinder-search'
+                  ? 'bg-sky-50/70 text-sky-600'
+                  : 'text-slate-700 hover:bg-slate-50'
+              }`}
+            >
+              <Search className="w-4 h-4 shrink-0 text-sky-500" />
+              <span>Truth Finder Search</span>
             </button>
           </nav>
           
@@ -242,16 +242,16 @@ export const Header: React.FC<HeaderProps> = ({
               }}
               id="mobile-header-start-btn"
               className={`w-full text-white font-semibold py-3 px-4 rounded-xl text-center flex items-center justify-center gap-2 shadow-sm ${
-                activePage === 'transunion-credit-check'
-                  ? 'bg-teal-600 hover:bg-teal-700'
+                activePage === 'truthfinder-search'
+                  ? 'bg-sky-600 hover:bg-sky-700 shadow-sky-600/10'
                   : 'bg-blue-600 hover:bg-blue-700'
               }`}
             >
               <span>
-                {activePage === 'transunion-credit-check'
-                  ? 'Start Credit Check'
-                  : activePage === 'reliable-credit-score'
-                  ? 'Access $1 Trial'
+                {activePage === 'reliable-credit-score'
+                  ? 'Access $1 Credit report'
+                  : activePage === 'truthfinder-search'
+                  ? 'Truth Finder Search'
                   : 'Start Background Check'}
               </span>
               <ExternalLink className="w-4 h-4 opacity-80" />

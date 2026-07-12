@@ -39,7 +39,7 @@ export const ReliableCreditScore: React.FC<ReliableCreditScoreProps> = ({
 
             {/* Headline */}
             <h1 className="text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.1] mb-6 font-display">
-              Get Your Reliable <span className="text-blue-600 underline decoration-blue-100 decoration-4 underline-offset-8">Credit Score for $1</span>
+              <span className="text-blue-600 underline decoration-blue-100 decoration-4 underline-offset-8">Access $1 Credit report</span>
             </h1>
 
             {/* Subtitle */}
@@ -53,7 +53,7 @@ export const ReliableCreditScore: React.FC<ReliableCreditScoreProps> = ({
                 onClick={onStartClick}
                 className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-2xl shadow-lg shadow-blue-600/20 hover:shadow-blue-600/30 active:scale-[0.99] transition-all flex items-center justify-center gap-2 group cursor-pointer text-base"
               >
-                <span>Access $1 Trial Credit Report</span>
+                <span>Access $1 Credit report</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
@@ -211,7 +211,7 @@ export const ReliableCreditScore: React.FC<ReliableCreditScoreProps> = ({
                   onClick={onStartClick}
                   className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl transition-all shadow-md shadow-blue-600/10 flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  <span>Verify My Score Now for $1</span>
+                  <span>Access $1 Credit report</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
@@ -224,7 +224,7 @@ export const ReliableCreditScore: React.FC<ReliableCreditScoreProps> = ({
       <section className="py-20 max-w-3xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight font-display mb-4">
-            Reliable Credit Score FAQ
+            $1 Credit Report FAQ
           </h2>
           <p className="text-sm text-slate-500">
             Everything you need to know about your $1 trial credit check.
@@ -282,7 +282,7 @@ export const ReliableCreditScore: React.FC<ReliableCreditScoreProps> = ({
             onClick={onStartClick}
             className="bg-blue-500 hover:bg-blue-400 text-slate-950 font-extrabold px-8 py-4 rounded-xl shadow-lg shadow-blue-500/10 hover:shadow-blue-500/20 active:scale-[0.99] transition-all flex items-center gap-2 mx-auto cursor-pointer"
           >
-            <span>Start $1 Credit Verification</span>
+            <span>Access $1 Credit report</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>
