@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShieldCheck, Menu, X, Settings, ChevronDown, ExternalLink, CreditCard, ClipboardCheck } from 'lucide-react';
+import { ShieldCheck, Menu, X, Settings, ChevronDown, ExternalLink, CreditCard, ClipboardCheck, Sparkles } from 'lucide-react';
 import { DOMAIN_IDEAS } from '../data';
 
 interface HeaderProps {
@@ -7,8 +7,8 @@ interface HeaderProps {
   onDomainChange: (domain: string) => void;
   onStartClick: () => void;
   onOpenSettings: () => void;
-  activePage: 'background-check' | 'transunion-credit-check';
-  onChangePage: (page: 'background-check' | 'transunion-credit-check') => void;
+  activePage: 'background-check' | 'transunion-credit-check' | 'reliable-credit-score';
+  onChangePage: (page: 'background-check' | 'transunion-credit-check' | 'reliable-credit-score') => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -21,6 +21,17 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [domainDropdownOpen, setDomainDropdownOpen] = useState(false);
+
+  const getThemeColors = () => {
+    switch (activePage) {
+      case 'transunion-credit-check':
+        return 'bg-teal-600 shadow-teal-500/20 text-white hover:bg-teal-700';
+      case 'reliable-credit-score':
+        return 'bg-blue-600 shadow-blue-500/20 text-white hover:bg-blue-700';
+      default:
+        return 'bg-blue-600 shadow-blue-500/20 text-white hover:bg-blue-700';
+    }
+  };
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-xs">
@@ -85,7 +96,7 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* Desktop Navigation Switcher */}
-          <nav className="hidden md:flex items-center bg-slate-100/80 p-1 rounded-2xl border border-slate-200/50">
+          <nav className="hidden lg:flex items-center bg-slate-100/80 p-1 rounded-2xl border border-slate-200/50">
             <button
               onClick={() => onChangePage('background-check')}
               className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
@@ -108,10 +119,21 @@ export const Header: React.FC<HeaderProps> = ({
               <CreditCard className="w-3.5 h-3.5" />
               <span>TransUnion® Credit Check</span>
             </button>
+            <button
+              onClick={() => onChangePage('reliable-credit-score')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                activePage === 'reliable-credit-score'
+                  ? 'bg-white text-blue-600 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <Sparkles className="w-3.5 h-3.5 text-amber-500 animate-pulse" />
+              <span>$1 Trial Credit Score</span>
+            </button>
           </nav>
 
           {/* Desktop Actions */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-3">
             <button
               onClick={onOpenSettings}
               className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-50 rounded-lg transition-colors cursor-pointer"
@@ -132,14 +154,16 @@ export const Header: React.FC<HeaderProps> = ({
               <span>
                 {activePage === 'transunion-credit-check' 
                   ? 'Start Credit Check' 
+                  : activePage === 'reliable-credit-score'
+                  ? 'Access $1 Trial'
                   : 'Start Background Check'}
               </span>
               <ExternalLink className="w-4 h-4 opacity-80" />
             </button>
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <div className="flex items-center gap-2 md:hidden">
+          {/* Mobile/Tablet Menu Toggle */}
+          <div className="flex items-center gap-2 lg:hidden">
             <button
               onClick={onOpenSettings}
               className="p-2 text-slate-400 hover:text-slate-600 rounded-lg cursor-pointer"
@@ -161,7 +185,7 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-b border-slate-100 px-4 pt-3 pb-6 space-y-4 shadow-lg animate-in fade-in slide-in-from-top-4 duration-200">
+        <div className="lg:hidden bg-white border-b border-slate-100 px-4 pt-3 pb-6 space-y-4 shadow-lg animate-in fade-in slide-in-from-top-4 duration-200">
           <div className="px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-slate-400">
             Select Portal Service
           </div>
@@ -194,6 +218,20 @@ export const Header: React.FC<HeaderProps> = ({
               <CreditCard className="w-4 h-4 shrink-0" />
               <span>TransUnion® Credit Check</span>
             </button>
+            <button
+              onClick={() => {
+                onChangePage('reliable-credit-score');
+                setMobileMenuOpen(false);
+              }}
+              className={`w-full text-left flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm font-bold transition-all cursor-pointer ${
+                activePage === 'reliable-credit-score'
+                  ? 'bg-blue-50/70 text-blue-600'
+                  : 'text-slate-700 hover:bg-slate-50'
+              }`}
+            >
+              <Sparkles className="w-4 h-4 shrink-0 text-amber-500 animate-pulse" />
+              <span>$1 Trial Credit Score</span>
+            </button>
           </nav>
           
           <div className="pt-2 px-3">
@@ -212,6 +250,8 @@ export const Header: React.FC<HeaderProps> = ({
               <span>
                 {activePage === 'transunion-credit-check'
                   ? 'Start Credit Check'
+                  : activePage === 'reliable-credit-score'
+                  ? 'Access $1 Trial'
                   : 'Start Background Check'}
               </span>
               <ExternalLink className="w-4 h-4 opacity-80" />

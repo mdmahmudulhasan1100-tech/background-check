@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { X, Settings, Link as LinkIcon, CheckCircle2, RotateCcw, ShieldCheck } from 'lucide-react';
-import { DEFAULT_AFFILIATE_URL, DEFAULT_TRANSUNION_URL } from '../data';
+import { X, Settings, Link as LinkIcon, CheckCircle2, RotateCcw } from 'lucide-react';
+import { DEFAULT_AFFILIATE_URL, DEFAULT_TRANSUNION_URL, DEFAULT_RELIABLE_CREDIT_URL } from '../data';
 
 interface SettingsModalProps {
   isOpen: boolean;
   onClose: () => void;
   currentUrl: string;
   transunionUrl: string;
-  onSaveUrls: (backgroundUrl: string, transunionUrl: string) => void;
+  reliableCreditUrl: string;
+  onSaveUrls: (backgroundUrl: string, transunionUrl: string, reliableCreditUrl: string) => void;
 }
 
 export const SettingsModal: React.FC<SettingsModalProps> = ({
@@ -15,10 +16,12 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   onClose,
   currentUrl,
   transunionUrl,
+  reliableCreditUrl,
   onSaveUrls,
 }) => {
   const [inputUrl, setInputUrl] = useState(currentUrl);
   const [inputTransunionUrl, setInputTransunionUrl] = useState(transunionUrl);
+  const [inputReliableCreditUrl, setInputReliableCreditUrl] = useState(reliableCreditUrl);
   const [savedSuccess, setSavedSuccess] = useState(false);
 
   // Sync states when modal opens or props change
@@ -26,8 +29,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
     if (isOpen) {
       setInputUrl(currentUrl);
       setInputTransunionUrl(transunionUrl);
+      setInputReliableCreditUrl(reliableCreditUrl);
     }
-  }, [isOpen, currentUrl, transunionUrl]);
+  }, [isOpen, currentUrl, transunionUrl, reliableCreditUrl]);
 
   if (!isOpen) return null;
 
@@ -41,7 +45,11 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
       alert('Please enter a valid TransUnion Credit Check URL starting with http:// or https://');
       return;
     }
-    onSaveUrls(inputUrl, inputTransunionUrl);
+    if (!inputReliableCreditUrl || !inputReliableCreditUrl.startsWith('http')) {
+      alert('Please enter a valid Reliable Credit $1 Trial URL starting with http:// or https://');
+      return;
+    }
+    onSaveUrls(inputUrl, inputTransunionUrl, inputReliableCreditUrl);
     setSavedSuccess(true);
     setTimeout(() => {
       setSavedSuccess(false);
@@ -52,6 +60,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   const handleReset = () => {
     setInputUrl(DEFAULT_AFFILIATE_URL);
     setInputTransunionUrl(DEFAULT_TRANSUNION_URL);
+    setInputReliableCreditUrl(DEFAULT_RELIABLE_CREDIT_URL);
   };
 
   return (
@@ -119,6 +128,22 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               onChange={(e) => setInputTransunionUrl(e.target.value)}
               placeholder="https://paymaxoffers.trakaff.net/tr?..."
               className="w-full px-4 py-3 rounded-xl border border-slate-200 font-mono text-xs text-slate-900 bg-slate-50 focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-teal-600 transition-all"
+            />
+          </div>
+
+          {/* Reliable Credit Check URL */}
+          <div>
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2 flex items-center gap-1.5">
+              <LinkIcon className="w-3.5 h-3.5 text-blue-600" />
+              <span>Reliable Credit $1 Trial Link</span>
+            </label>
+            <input
+              type="url"
+              required
+              value={inputReliableCreditUrl}
+              onChange={(e) => setInputReliableCreditUrl(e.target.value)}
+              placeholder="https://paymaxoffers.trakaff.net/tr?offer_id=194..."
+              className="w-full px-4 py-3 rounded-xl border border-slate-200 font-mono text-xs text-slate-900 bg-slate-50 focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-blue-600 transition-all"
             />
           </div>
 
