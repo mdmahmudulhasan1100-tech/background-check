@@ -1,0 +1,7 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Host & Sitemap location
+Host: whitebridgefind.com
+Sitemap: https://whitebridgefind.com/sitemap.xml

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Primary Homepage -->
+  <url>
+    <loc>https://whitebridgefind.com/</loc>
+    <lastmod>2026-07-12</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- Access $1 Credit report / Reliable Credit Score Section -->
+  <url>
+    <loc>https://whitebridgefind.com/#reliable-credit</loc>
+    <lastmod>2026-07-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- TransUnion Credit Check Section -->
+  <url>
+    <loc>https://whitebridgefind.com/#credit-check</loc>
+    <lastmod>2026-07-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- TruthFinder Criminal Search Section -->
+  <url>
+    <loc>https://whitebridgefind.com/#truthfinder</loc>
+    <lastmod>2026-07-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Rental Background Checks Section -->
+  <url>
+    <loc>https://whitebridgefind.com/#background-check</loc>
+    <lastmod>2026-07-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>
