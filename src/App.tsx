@@ -10,6 +10,7 @@ import { LegalModal } from './components/LegalModal';
 import { SettingsModal } from './components/SettingsModal';
 import { ReliableCreditScore } from './components/ReliableCreditScore';
 import { TruthFinderSearch } from './components/TruthFinderSearch';
+import { TransUnionCreditCheck } from './components/TransUnionCreditCheck';
 import { DOMAIN_IDEAS, DEFAULT_AFFILIATE_URL, DEFAULT_TRANSUNION_URL, DEFAULT_RELIABLE_CREDIT_URL, DEFAULT_TRUTHFINDER_URL } from './data';
 
 export default function App() {
@@ -20,7 +21,7 @@ export default function App() {
   const [truthfinderUrl, setTruthfinderUrl] = useState<string>(DEFAULT_TRUTHFINDER_URL);
   
   // Navigation
-  const [activePage, setActivePage] = useState<'background-check' | 'reliable-credit-score' | 'truthfinder-search'>('background-check');
+  const [activePage, setActivePage] = useState<'background-check' | 'transunion-credit-check' | 'reliable-credit-score' | 'truthfinder-search'>('background-check');
 
   // Modals state
   const [settingsModalOpen, setSettingsModalOpen] = useState<boolean>(false);
@@ -78,7 +79,10 @@ export default function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
-      if (hash === '#reliable-credit') {
+      if (hash === '#credit-check') {
+        setActivePage('transunion-credit-check');
+        document.title = `${currentDomain} | TransUnion® Credit Check`;
+      } else if (hash === '#reliable-credit') {
         setActivePage('reliable-credit-score');
         document.title = `${currentDomain} | Access $1 Credit report`;
       } else if (hash === '#truthfinder') {
@@ -100,7 +104,9 @@ export default function App() {
     try {
       localStorage.setItem('verify_app_domain', domain);
     } catch (e) {}
-    if (activePage === 'reliable-credit-score') {
+    if (activePage === 'transunion-credit-check') {
+      document.title = `${domain} | TransUnion® Credit Check`;
+    } else if (activePage === 'reliable-credit-score') {
       document.title = `${domain} | Access $1 Credit report`;
     } else if (activePage === 'truthfinder-search') {
       document.title = `${domain} | TruthFinder Criminal Search`;
@@ -109,8 +115,10 @@ export default function App() {
     }
   };
 
-  const handleChangePage = (page: 'background-check' | 'reliable-credit-score' | 'truthfinder-search') => {
-    if (page === 'reliable-credit-score') {
+  const handleChangePage = (page: 'background-check' | 'transunion-credit-check' | 'reliable-credit-score' | 'truthfinder-search') => {
+    if (page === 'transunion-credit-check') {
+      window.location.hash = '#credit-check';
+    } else if (page === 'reliable-credit-score') {
       window.location.hash = '#reliable-credit';
     } else if (page === 'truthfinder-search') {
       window.location.hash = '#truthfinder';
@@ -173,7 +181,9 @@ export default function App() {
   };
 
   const handleGlobalStartClick = () => {
-    if (activePage === 'reliable-credit-score') {
+    if (activePage === 'transunion-credit-check') {
+      handleStartCreditCheck();
+    } else if (activePage === 'reliable-credit-score') {
       handleStartReliableCreditCheck();
     } else if (activePage === 'truthfinder-search') {
       handleStartTruthfinderSearch();
@@ -196,7 +206,12 @@ export default function App() {
 
       {/* Page Content */}
       <main className="flex-1">
-        {activePage === 'reliable-credit-score' ? (
+        {activePage === 'transunion-credit-check' ? (
+          <TransUnionCreditCheck 
+            onStartClick={handleStartCreditCheck}
+            transunionUrl={transunionUrl}
+          />
+        ) : activePage === 'reliable-credit-score' ? (
           <ReliableCreditScore 
             onStartClick={handleStartReliableCreditCheck}
             reliableCreditUrl={reliableCreditUrl}

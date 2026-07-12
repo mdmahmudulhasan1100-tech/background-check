@@ -124,6 +124,22 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             />
           </div>
 
+          {/* TransUnion Credit Check URL */}
+          <div>
+            <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2 flex items-center gap-1.5">
+              <LinkIcon className="w-3.5 h-3.5 text-teal-600" />
+              <span>TransUnion Credit Check Link</span>
+            </label>
+            <input
+              type="url"
+              required
+              value={inputTransunionUrl}
+              onChange={(e) => setInputTransunionUrl(e.target.value)}
+              placeholder="https://paymaxoffers.trakaff.net/tr?..."
+              className="w-full px-4 py-3 rounded-xl border border-slate-200 font-mono text-xs text-slate-900 bg-slate-50 focus:bg-white focus:outline-hidden focus:ring-2 focus:ring-teal-600 transition-all"
+            />
+          </div>
+
           {/* Access $1 Credit report URL */}
           <div>
             <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2 flex items-center gap-1.5">
