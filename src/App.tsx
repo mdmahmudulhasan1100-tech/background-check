@@ -48,7 +48,7 @@ export default function App() {
       }
 
       const savedTransunion = localStorage.getItem('verify_app_transunion');
-      if (savedTransunion) {
+      if (savedTransunion && !savedTransunion.includes('offer_id=14') && !savedTransunion.includes('19113')) {
         setTransunionUrl(savedTransunion.replace(/([^:]\/)\/+/g, '$1'));
       } else {
         setTransunionUrl(DEFAULT_TRANSUNION_URL);
