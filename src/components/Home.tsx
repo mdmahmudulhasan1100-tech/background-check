@@ -2,6 +2,7 @@ import React from 'react';
 import { Hero } from './Hero';
 import { HowItWorks } from './HowItWorks';
 import { WhoItsFor } from './WhoItsFor';
+import { EducationalResourcesSection } from './EducationalResourcesSection';
 import { FAQ } from './FAQ';
 import { CTASection } from './CTASection';
 import { SEOHead } from './SEOHead';
@@ -25,6 +26,7 @@ export const Home: React.FC<HomeProps> = ({
       <Hero onStartClick={onStartClick} />
       <HowItWorks />
       <WhoItsFor onStartClick={onStartClick} />
+      <EducationalResourcesSection />
       <FAQ />
       <CTASection
         onStartClick={onStartClick}

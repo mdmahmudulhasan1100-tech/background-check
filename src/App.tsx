@@ -6,6 +6,8 @@ import { TenantBackgroundCheck } from './components/TenantBackgroundCheck';
 import { TransUnionCreditCheck } from './components/TransUnionCreditCheck';
 import { ReliableCreditScore } from './components/ReliableCreditScore';
 import { TruthFinderSearch } from './components/TruthFinderSearch';
+import { GuidesHub } from './components/GuidesHub';
+import { GuideDetail } from './components/GuideDetail';
 import { Footer } from './components/Footer';
 import { LegalModal } from './components/LegalModal';
 import { SettingsModal } from './components/SettingsModal';
@@ -227,6 +229,22 @@ function MainApp() {
               <TruthFinderSearch 
                 onStartClick={handleStartTruthfinderSearch} 
                 truthfinderUrl={truthfinderUrl} 
+              />
+            } 
+          />
+          <Route 
+            path="/guides" 
+            element={
+              <GuidesHub 
+                onStartClick={handleGlobalStartClick} 
+              />
+            } 
+          />
+          <Route 
+            path="/guides/:slug" 
+            element={
+              <GuideDetail 
+                onStartClick={handleGlobalStartClick} 
               />
             } 
           />

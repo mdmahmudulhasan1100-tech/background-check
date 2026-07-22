@@ -39,4 +39,52 @@
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- Landlord Educational Resource Center Hub -->
+  <url>
+    <loc>https://www.whitebridgefind.com/guides</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- How to Screen Tenants Guide -->
+  <url>
+    <loc>https://www.whitebridgefind.com/guides/how-to-screen-tenants</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Reading Credit Reports Guide -->
+  <url>
+    <loc>https://www.whitebridgefind.com/guides/what-landlords-look-for-in-credit-reports</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Reading Criminal Background Check Guide -->
+  <url>
+    <loc>https://www.whitebridgefind.com/guides/how-to-read-criminal-background-check</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Tenant Screening Laws by State -->
+  <url>
+    <loc>https://www.whitebridgefind.com/guides/tenant-screening-laws-by-state</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Red Flags in Rental Applications -->
+  <url>
+    <loc>https://www.whitebridgefind.com/guides/red-flags-in-rental-applications</loc>
+    <lastmod>2026-07-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

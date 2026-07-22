@@ -19,10 +19,10 @@ export const Footer: React.FC<FooterProps> = ({
     <footer className="bg-slate-950 text-slate-400 pt-16 pb-12 border-t border-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 pb-12 border-b border-slate-900">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-slate-900">
           
           {/* Col 1: Brand & Bio */}
-          <div className="space-y-4">
+          <div className="space-y-4 lg:col-span-1">
             <Link to="/" className="flex items-center gap-2.5 text-white font-bold text-xl font-display">
               <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white">
                 <ShieldCheck className="w-5 h-5" />
@@ -40,10 +40,10 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
           </div>
 
-          {/* Col 2: Direct Page Links for Search Engine Indexing */}
+          {/* Col 2: Direct Page Links */}
           <div className="space-y-3">
             <h4 className="text-white text-sm font-semibold uppercase tracking-wider font-display">
-              Screening Services
+              Screening Tools
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
@@ -74,7 +74,46 @@ export const Footer: React.FC<FooterProps> = ({
             </ul>
           </div>
 
-          {/* Col 3: Legal & Compliance */}
+          {/* Col 3: Educational Landlord Guides */}
+          <div className="space-y-3">
+            <h4 className="text-white text-sm font-semibold uppercase tracking-wider font-display">
+              Landlord Guides
+            </h4>
+            <ul className="space-y-2 text-xs">
+              <li>
+                <Link to="/guides" className="text-blue-400 font-semibold hover:underline">
+                  All Educational Guides →
+                </Link>
+              </li>
+              <li>
+                <Link to="/guides/how-to-screen-tenants" className="hover:text-white transition-colors">
+                  How to Screen Tenants
+                </Link>
+              </li>
+              <li>
+                <Link to="/guides/what-landlords-look-for-in-credit-reports" className="hover:text-white transition-colors">
+                  Reading Credit Reports
+                </Link>
+              </li>
+              <li>
+                <Link to="/guides/how-to-read-criminal-background-check" className="hover:text-white transition-colors">
+                  Criminal Background Checks
+                </Link>
+              </li>
+              <li>
+                <Link to="/guides/tenant-screening-laws-by-state" className="hover:text-white transition-colors">
+                  State Screening Laws
+                </Link>
+              </li>
+              <li>
+                <Link to="/guides/red-flags-in-rental-applications" className="hover:text-white transition-colors">
+                  Rental Application Red Flags
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 4: Legal & Compliance */}
           <div className="space-y-3">
             <h4 className="text-white text-sm font-semibold uppercase tracking-wider font-display">
               Legal & Privacy
@@ -117,7 +156,7 @@ export const Footer: React.FC<FooterProps> = ({
             </ul>
           </div>
 
-          {/* Col 4: Contact & Settings */}
+          {/* Col 5: Contact & Settings */}
           <div className="space-y-3">
             <h4 className="text-white text-sm font-semibold uppercase tracking-wider font-display">
               Contact Desk
@@ -130,7 +169,7 @@ export const Footer: React.FC<FooterProps> = ({
                 </a>
               </li>
               <li>
-                <span className="block text-[11px] text-slate-500">Compliance & FCRA Desk</span>
+                <span className="block text-[11px] text-slate-500">Compliance Desk</span>
                 <a href="mailto:compliance@verifyapplicant.com" className="hover:text-white transition-colors">
                   compliance@{currentDomain.toLowerCase()}
                 </a>
@@ -141,7 +180,7 @@ export const Footer: React.FC<FooterProps> = ({
                   className="inline-flex items-center gap-1.5 text-xs text-blue-400 hover:text-blue-300 bg-blue-950/50 px-2.5 py-1.5 rounded-lg border border-blue-900/50 transition-colors cursor-pointer"
                 >
                   <Settings className="w-3.5 h-3.5" />
-                  <span>Configure Destination Links</span>
+                  <span>Configure Portal Destination URL</span>
                 </button>
               </li>
             </ul>

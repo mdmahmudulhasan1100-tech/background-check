@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { ShieldCheck, Menu, X, Settings, ChevronDown, ExternalLink, CreditCard, ClipboardCheck, Sparkles, Search, Home } from 'lucide-react';
+import { ShieldCheck, Menu, X, Settings, ChevronDown, ExternalLink, CreditCard, ClipboardCheck, Sparkles, Search, Home, BookOpen } from 'lucide-react';
 import { DOMAIN_IDEAS } from '../data';
 
 interface HeaderProps {
@@ -23,6 +23,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   const getActiveKey = () => {
     const path = location.pathname;
+    if (path.startsWith('/guides')) return 'guides';
     if (path === '/tenant-background-check') return 'tenant-background-check';
     if (path === '/transunion-credit-check') return 'transunion-credit-check';
     if (path === '/reliable-credit-score') return 'reliable-credit-score';
@@ -156,6 +157,17 @@ export const Header: React.FC<HeaderProps> = ({
               <Search className="w-3.5 h-3.5 text-sky-500" />
               <span>TruthFinder Search</span>
             </Link>
+            <Link
+              to="/guides"
+              className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
+                activeKey === 'guides'
+                  ? 'bg-white text-blue-600 shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <BookOpen className="w-3.5 h-3.5 text-blue-500" />
+              <span>Landlord Guides</span>
+            </Link>
           </nav>
 
           {/* Desktop Actions */}
@@ -283,6 +295,19 @@ export const Header: React.FC<HeaderProps> = ({
             >
               <Search className="w-4 h-4 shrink-0 text-sky-500" />
               <span>TruthFinder Search</span>
+            </Link>
+
+            <Link
+              to="/guides"
+              onClick={() => setMobileMenuOpen(false)}
+              className={`w-full text-left flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm font-bold transition-all ${
+                activeKey === 'guides'
+                  ? 'bg-blue-50/70 text-blue-600'
+                  : 'text-slate-700 hover:bg-slate-50'
+              }`}
+            >
+              <BookOpen className="w-4 h-4 shrink-0 text-blue-500" />
+              <span>Landlord Educational Guides</span>
             </Link>
           </nav>
           
