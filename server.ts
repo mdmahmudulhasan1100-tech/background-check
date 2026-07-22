@@ -141,13 +141,20 @@ async function startServer() {
 
     // Production catch-all for all routes: 200 OK with index.html
     app.get("*", (req, res) => {
+      const reqPath = req.path.replace(/\/$/, "") || "/";
+      const routeFilePath = path.join(distPath, reqPath.slice(1), "index.html");
       const indexPath = path.join(distPath, "index.html");
-      if (fs.existsSync(indexPath)) {
-        const rawHtml = fs.readFileSync(indexPath, "utf-8");
-        serveIndexHtml(req, res, rawHtml);
+
+      let rawHtml = "";
+      if (reqPath !== "/" && fs.existsSync(routeFilePath)) {
+        rawHtml = fs.readFileSync(routeFilePath, "utf-8");
+      } else if (fs.existsSync(indexPath)) {
+        rawHtml = fs.readFileSync(indexPath, "utf-8");
       } else {
         res.status(404).send("Application dist build missing.");
+        return;
       }
+      serveIndexHtml(req, res, rawHtml);
     });
   }
 
