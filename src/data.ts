@@ -9,7 +9,7 @@ export const DOMAIN_IDEAS = [
 ];
 
 export const DEFAULT_AFFILIATE_URL = 'https://paymaxoffers.trakaff.net/tr?offer_id=12&aff_id=325';
-export const DEFAULT_TRANSUNION_URL = 'https://paymaxoffers.trakaff.net//tr?offer_id=190&aff_id=325';
+export const DEFAULT_TRANSUNION_URL = 'https://paymaxoffers.trakaff.net/tr?offer_id=190&aff_id=325';
 export const DEFAULT_RELIABLE_CREDIT_URL = 'https://paymaxoffers.trakaff.net/tr?offer_id=194&aff_id=325';
 export const DEFAULT_TRUTHFINDER_URL = 'https://paymaxoffers.trakaff.net/tr?offer_id=200&aff_id=325';
 

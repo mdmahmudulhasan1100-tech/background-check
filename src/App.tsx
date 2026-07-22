@@ -1,31 +1,53 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { Header } from './components/Header';
-import { Hero } from './components/Hero';
-import { HowItWorks } from './components/HowItWorks';
-import { WhoItsFor } from './components/WhoItsFor';
-import { FAQ } from './components/FAQ';
-import { CTASection } from './components/CTASection';
+import { Home } from './components/Home';
+import { TenantBackgroundCheck } from './components/TenantBackgroundCheck';
+import { TransUnionCreditCheck } from './components/TransUnionCreditCheck';
+import { ReliableCreditScore } from './components/ReliableCreditScore';
+import { TruthFinderSearch } from './components/TruthFinderSearch';
 import { Footer } from './components/Footer';
 import { LegalModal } from './components/LegalModal';
 import { SettingsModal } from './components/SettingsModal';
-import { ReliableCreditScore } from './components/ReliableCreditScore';
-import { TruthFinderSearch } from './components/TruthFinderSearch';
-import { TransUnionCreditCheck } from './components/TransUnionCreditCheck';
 import { DOMAIN_IDEAS, DEFAULT_AFFILIATE_URL, DEFAULT_TRANSUNION_URL, DEFAULT_RELIABLE_CREDIT_URL, DEFAULT_TRUTHFINDER_URL } from './data';
 
-export default function App() {
+// Component to handle legacy hash routing redirect seamlessly to clean URLs
+function HashRedirector() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash === '#background-check') {
+      window.history.replaceState(null, '', '/tenant-background-check');
+      navigate('/tenant-background-check', { replace: true });
+    } else if (hash === '#credit-check') {
+      window.history.replaceState(null, '', '/transunion-credit-check');
+      navigate('/transunion-credit-check', { replace: true });
+    } else if (hash === '#reliable-credit') {
+      window.history.replaceState(null, '', '/reliable-credit-score');
+      navigate('/reliable-credit-score', { replace: true });
+    } else if (hash === '#truthfinder') {
+      window.history.replaceState(null, '', '/truthfinder-criminal-search');
+      navigate('/truthfinder-criminal-search', { replace: true });
+    }
+  }, [location, navigate]);
+
+  return null;
+}
+
+function MainApp() {
   const [currentDomain, setCurrentDomain] = useState<string>(DOMAIN_IDEAS[0]);
   const [affiliateUrl, setAffiliateUrl] = useState<string>(DEFAULT_AFFILIATE_URL);
   const [transunionUrl, setTransunionUrl] = useState<string>(DEFAULT_TRANSUNION_URL);
   const [reliableCreditUrl, setReliableCreditUrl] = useState<string>(DEFAULT_RELIABLE_CREDIT_URL);
   const [truthfinderUrl, setTruthfinderUrl] = useState<string>(DEFAULT_TRUTHFINDER_URL);
-  
-  // Navigation
-  const [activePage, setActivePage] = useState<'background-check' | 'transunion-credit-check' | 'reliable-credit-score' | 'truthfinder-search'>('background-check');
 
   // Modals state
   const [settingsModalOpen, setSettingsModalOpen] = useState<boolean>(false);
   const [legalModalType, setLegalModalType] = useState<'privacy' | 'terms' | 'affiliate' | null>(null);
+
+  const location = useLocation();
 
   useEffect(() => {
     // Load persisted brand or affiliate configs
@@ -75,56 +97,11 @@ export default function App() {
     }
   }, []);
 
-  // Hash-based client side routing
-  useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash;
-      if (hash === '#credit-check') {
-        setActivePage('transunion-credit-check');
-        document.title = `${currentDomain} | TransUnion® Credit Check`;
-      } else if (hash === '#reliable-credit') {
-        setActivePage('reliable-credit-score');
-        document.title = `${currentDomain} | Access $1 Credit report`;
-      } else if (hash === '#truthfinder') {
-        setActivePage('truthfinder-search');
-        document.title = `${currentDomain} | TruthFinder Criminal Search`;
-      } else {
-        setActivePage('background-check');
-        document.title = `${currentDomain} | Rental Online Background checks`;
-      }
-    };
-
-    handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, [currentDomain]);
-
   const handleDomainChange = (domain: string) => {
     setCurrentDomain(domain);
     try {
       localStorage.setItem('verify_app_domain', domain);
     } catch (e) {}
-    if (activePage === 'transunion-credit-check') {
-      document.title = `${domain} | TransUnion® Credit Check`;
-    } else if (activePage === 'reliable-credit-score') {
-      document.title = `${domain} | Access $1 Credit report`;
-    } else if (activePage === 'truthfinder-search') {
-      document.title = `${domain} | TruthFinder Criminal Search`;
-    } else {
-      document.title = `${domain} | Rental Online Background checks`;
-    }
-  };
-
-  const handleChangePage = (page: 'background-check' | 'transunion-credit-check' | 'reliable-credit-score' | 'truthfinder-search') => {
-    if (page === 'transunion-credit-check') {
-      window.location.hash = '#credit-check';
-    } else if (page === 'reliable-credit-score') {
-      window.location.hash = '#reliable-credit';
-    } else if (page === 'truthfinder-search') {
-      window.location.hash = '#truthfinder';
-    } else {
-      window.location.hash = '';
-    }
   };
 
   const handleSaveUrls = (bgUrl: string, tuUrl: string, relUrl: string, tfUrl: string) => {
@@ -181,11 +158,12 @@ export default function App() {
   };
 
   const handleGlobalStartClick = () => {
-    if (activePage === 'transunion-credit-check') {
+    const path = location.pathname;
+    if (path === '/transunion-credit-check') {
       handleStartCreditCheck();
-    } else if (activePage === 'reliable-credit-score') {
+    } else if (path === '/reliable-credit-score') {
       handleStartReliableCreditCheck();
-    } else if (activePage === 'truthfinder-search') {
+    } else if (path === '/truthfinder-criminal-search') {
       handleStartTruthfinderSearch();
     } else {
       handleStartBackgroundCheck();
@@ -194,45 +172,75 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white text-slate-900 flex flex-col selection:bg-blue-100 selection:text-blue-900 font-sans">
+      <HashRedirector />
+
       {/* Main Header / Navigation */}
       <Header
         currentDomain={currentDomain}
         onDomainChange={handleDomainChange}
         onStartClick={handleGlobalStartClick}
         onOpenSettings={() => setSettingsModalOpen(true)}
-        activePage={activePage}
-        onChangePage={handleChangePage}
       />
 
-      {/* Page Content */}
+      {/* Page Content Routes */}
       <main className="flex-1">
-        {activePage === 'transunion-credit-check' ? (
-          <TransUnionCreditCheck 
-            onStartClick={handleStartCreditCheck}
-            transunionUrl={transunionUrl}
+        <Routes>
+          <Route 
+            path="/" 
+            element={
+              <Home 
+                onStartClick={handleStartBackgroundCheck} 
+                affiliateUrl={affiliateUrl} 
+              />
+            } 
           />
-        ) : activePage === 'reliable-credit-score' ? (
-          <ReliableCreditScore 
-            onStartClick={handleStartReliableCreditCheck}
-            reliableCreditUrl={reliableCreditUrl}
+          <Route 
+            path="/tenant-background-check" 
+            element={
+              <TenantBackgroundCheck 
+                onStartClick={handleStartBackgroundCheck} 
+                affiliateUrl={affiliateUrl} 
+              />
+            } 
           />
-        ) : activePage === 'truthfinder-search' ? (
-          <TruthFinderSearch 
-            onStartClick={handleStartTruthfinderSearch}
-            truthfinderUrl={truthfinderUrl}
+          <Route 
+            path="/transunion-credit-check" 
+            element={
+              <TransUnionCreditCheck 
+                onStartClick={handleStartCreditCheck} 
+                transunionUrl={transunionUrl} 
+              />
+            } 
           />
-        ) : (
-          <>
-            <Hero onStartClick={handleStartBackgroundCheck} />
-            <HowItWorks />
-            <WhoItsFor onStartClick={handleStartBackgroundCheck} />
-            <FAQ />
-            <CTASection
-              onStartClick={handleStartBackgroundCheck}
-              affiliateUrl={affiliateUrl}
-            />
-          </>
-        )}
+          <Route 
+            path="/reliable-credit-score" 
+            element={
+              <ReliableCreditScore 
+                onStartClick={handleStartReliableCreditCheck} 
+                reliableCreditUrl={reliableCreditUrl} 
+              />
+            } 
+          />
+          <Route 
+            path="/truthfinder-criminal-search" 
+            element={
+              <TruthFinderSearch 
+                onStartClick={handleStartTruthfinderSearch} 
+                truthfinderUrl={truthfinderUrl} 
+              />
+            } 
+          />
+          {/* Catch-all fallback route to home */}
+          <Route 
+            path="*" 
+            element={
+              <Home 
+                onStartClick={handleStartBackgroundCheck} 
+                affiliateUrl={affiliateUrl} 
+              />
+            } 
+          />
+        </Routes>
       </main>
 
       {/* Footer */}
@@ -243,7 +251,6 @@ export default function App() {
       />
 
       {/* Interactive Modals */}
-
       <LegalModal
         modalType={legalModalType}
         onClose={() => setLegalModalType(null)}
@@ -258,7 +265,14 @@ export default function App() {
         truthfinderUrl={truthfinderUrl}
         onSaveUrls={handleSaveUrls}
       />
-
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <MainApp />
+    </BrowserRouter>
   );
 }

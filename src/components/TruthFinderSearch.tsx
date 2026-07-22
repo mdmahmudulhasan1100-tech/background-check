@@ -5,13 +5,10 @@ import {
   Lock, 
   ArrowRight, 
   CheckCircle2, 
-  EyeOff, 
-  Scale, 
   Fingerprint, 
   AlertTriangle, 
   HelpCircle,
   MapPin,
-  Clock,
   UserX,
   Phone,
   Image,
@@ -19,8 +16,9 @@ import {
   DollarSign,
   Heart,
   Home,
-  ShieldAlert
+  Scale
 } from 'lucide-react';
+import { SEOHead } from './SEOHead';
 
 interface TruthFinderSearchProps {
   onStartClick: () => void;
@@ -29,7 +27,6 @@ interface TruthFinderSearchProps {
 
 export const TruthFinderSearch: React.FC<TruthFinderSearchProps> = ({
   onStartClick,
-  truthfinderUrl,
 }) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -50,6 +47,11 @@ export const TruthFinderSearch: React.FC<TruthFinderSearchProps> = ({
 
   return (
     <div className="bg-slate-50 min-h-screen font-sans">
+      <SEOHead
+        title="TruthFinder Criminal Search & Public Records Check | Background Screening"
+        description="Perform nationwide criminal searches and public record lookups with TruthFinder. Instant access to court records, criminal histories, and contact info."
+        canonicalUrl="https://www.whitebridgefind.com/truthfinder-criminal-search"
+      />
       
       {/* High-Converting Hero Section with Reference Colors */}
       <section className="relative overflow-hidden bg-[#0c7cb0] text-white pt-12 pb-16 sm:pt-20 sm:pb-24">
@@ -67,9 +69,9 @@ export const TruthFinderSearch: React.FC<TruthFinderSearchProps> = ({
 
           <div className="text-center max-w-4xl mx-auto mt-10 sm:mt-6 animate-in fade-in slide-in-from-top-4 duration-300">
             
-            {/* Main Headline from User Image */}
+            {/* H1 Headline */}
             <h1 className="text-3xl sm:text-5xl font-light text-white tracking-tight leading-[1.15] mb-6 font-display">
-              Give us 13 minutes, and we may change the way you think about <span className="font-bold underline decoration-amber-400 decoration-3 underline-offset-4">co-workers</span>
+              TruthFinder <span className="font-bold underline decoration-amber-400 decoration-3 underline-offset-4">Nationwide Criminal Search</span> & Public Record Check
             </h1>
 
             {/* Subtitle / Promise */}
@@ -77,12 +79,12 @@ export const TruthFinderSearch: React.FC<TruthFinderSearchProps> = ({
               Search Billions of Public Records to find Social Media, Photos, Police Records, Background Checks, Civil Judgments, Contact Information and Much More!
             </p>
 
-            {/* Search Card Container styled EXACTLY like the screenshot */}
+            {/* Search Card Container */}
             <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden border border-sky-600/30 text-slate-800 text-left mb-12">
               
               {/* Yellow Alert Header Strip */}
               <div className="bg-[#ffc72c] px-4 py-2 text-center text-xs font-black text-slate-900 tracking-wider uppercase select-none">
-                🔥 ENJOY UNLIMITED SEARCHES!
+                🔥 ENJOY UNLIMITED PUBLIC RECORD SEARCHES!
               </div>
 
               {/* Form Input fields */}
@@ -164,7 +166,7 @@ export const TruthFinderSearch: React.FC<TruthFinderSearchProps> = ({
               </form>
             </div>
 
-            {/* Bottom Icon Row from Screenshot */}
+            {/* Bottom Icon Row */}
             <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-y-6 gap-x-2 text-center pt-4 border-t border-sky-300/20 text-sky-100 max-w-5xl mx-auto">
               <div className="flex flex-col items-center gap-1.5 group">
                 <div className="w-8 h-8 flex items-center justify-center text-sky-200">
@@ -198,7 +200,7 @@ export const TruthFinderSearch: React.FC<TruthFinderSearchProps> = ({
                 <div className="w-8 h-8 flex items-center justify-center text-sky-200">
                   <Heart className="w-5 h-5" />
                 </div>
-                <span className="text-[11px] font-medium leading-tight">Dating Websites</span>
+                <span className="text-[11px] font-medium leading-tight">Dating Profiles</span>
               </div>
 
               <div className="flex flex-col items-center gap-1.5">
@@ -280,16 +282,16 @@ export const TruthFinderSearch: React.FC<TruthFinderSearchProps> = ({
             FCRA Compliance Disclaimer
           </h3>
           <p className="text-[11px] text-slate-600 leading-relaxed max-w-2xl mx-auto">
-            Truth Finder is not a "consumer reporting agency" as defined by the Fair Credit Reporting Act (FCRA). You may not use Truth Finder's tools or reports to make decisions regarding employment, tenant vetting, professional credit, or insurance assessments. For official tenant background screening, please use our dedicated **Rental Background Checks** portal.
+            TruthFinder is not a "consumer reporting agency" as defined by the Fair Credit Reporting Act (FCRA). You may not use TruthFinder's tools or reports to make decisions regarding employment, tenant vetting, professional credit, or insurance assessments. For official tenant background screening, please use our dedicated **Rental Background Checks** portal.
           </p>
         </div>
       </section>
 
-      {/* Trust Finder FAQ */}
+      {/* TruthFinder FAQ */}
       <section className="py-16 max-w-3xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-10">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display">
-            Truth Finder Search FAQ
+            TruthFinder Search FAQ
           </h2>
           <p className="text-xs text-slate-500 mt-2">
             Answers to common questions regarding deep public records searches.
@@ -303,7 +305,7 @@ export const TruthFinderSearch: React.FC<TruthFinderSearchProps> = ({
               Will the person know that I searched for them?
             </h4>
             <p className="text-xs text-slate-600 leading-relaxed ml-6">
-              No. Searches conducted via the Truth Finder platform are 100% confidential. The subject of your search is never notified, and search histories are fully protected.
+              No. Searches conducted via the TruthFinder platform are 100% confidential. The subject of your search is never notified, and search histories are fully protected.
             </p>
           </div>
 
@@ -341,18 +343,17 @@ export const TruthFinderSearch: React.FC<TruthFinderSearchProps> = ({
             Uncover Public Records Instantly
           </h2>
           <p className="text-xs text-slate-400 leading-relaxed mb-6 max-w-xl mx-auto">
-            Scan criminal listings, police records, contact registers, and background files confidentially using the official Truth Finder partner portal.
+            Scan criminal listings, police records, contact registers, and background files confidentially using the official TruthFinder partner portal.
           </p>
           <button
             onClick={onStartClick}
             className="bg-[#4abf91] hover:bg-[#3ca87e] text-white font-black px-8 py-3.5 rounded-xl shadow-lg shadow-emerald-900/20 hover:shadow-emerald-950/30 active:scale-[0.99] transition-all flex items-center gap-2 mx-auto cursor-pointer uppercase text-sm"
           >
-            <span>Start Truth Finder Search</span>
+            <span>Start TruthFinder Search</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>
       </section>
-
     </div>
   );
 };

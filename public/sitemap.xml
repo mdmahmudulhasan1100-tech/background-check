@@ -8,35 +8,35 @@
     <priority>1.0</priority>
   </url>
   
-  <!-- Access $1 Credit report / Reliable Credit Score Section -->
+  <!-- FCRA Compliant Tenant Background Check -->
   <url>
-    <loc>https://www.whitebridgefind.com/#reliable-credit</loc>
+    <loc>https://www.whitebridgefind.com/tenant-background-check</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- TransUnion Credit Check Section -->
+  <!-- TransUnion Credit Check & Resident Screening -->
   <url>
-    <loc>https://www.whitebridgefind.com/#credit-check</loc>
+    <loc>https://www.whitebridgefind.com/transunion-credit-check</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
 
-  <!-- TruthFinder Criminal Search Section -->
+  <!-- Access $1 Credit Report & Score -->
   <url>
-    <loc>https://www.whitebridgefind.com/#truthfinder</loc>
+    <loc>https://www.whitebridgefind.com/reliable-credit-score</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
 
-  <!-- Rental Background Checks Section -->
+  <!-- TruthFinder Criminal Search & Public Records -->
   <url>
-    <loc>https://www.whitebridgefind.com/#background-check</loc>
+    <loc>https://www.whitebridgefind.com/truthfinder-criminal-search</loc>
     <lastmod>2026-07-22</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.9</priority>
   </url>
 </urlset>

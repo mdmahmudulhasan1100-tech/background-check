@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ShieldCheck, Lock, Settings } from 'lucide-react';
 
 interface FooterProps {
@@ -18,33 +19,67 @@ export const Footer: React.FC<FooterProps> = ({
     <footer className="bg-slate-950 text-slate-400 pt-16 pb-12 border-t border-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-slate-900">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 pb-12 border-b border-slate-900">
           
           {/* Col 1: Brand & Bio */}
-          <div className="md:col-span-2 space-y-4">
-            <div className="flex items-center gap-2.5 text-white font-bold text-xl font-display">
+          <div className="space-y-4">
+            <Link to="/" className="flex items-center gap-2.5 text-white font-bold text-xl font-display">
               <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white">
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <span>{currentDomain}</span>
-            </div>
+            </Link>
 
-            <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
+            <p className="text-xs text-slate-400 leading-relaxed">
               Streamlined online background check and tenant screening gateway. Connecting property managers, employers, and applicants to accredited verification clearinghouses.
             </p>
 
-            <div className="flex items-center gap-2 text-xs text-slate-500 pt-2">
+            <div className="flex items-center gap-2 text-xs text-slate-500 pt-1">
               <Lock className="w-3.5 h-3.5 text-blue-500" />
               <span>Encrypted SSL Verification Gateway</span>
             </div>
           </div>
 
-          {/* Col 2: Legal & Compliance */}
+          {/* Col 2: Direct Page Links for Search Engine Indexing */}
+          <div className="space-y-3">
+            <h4 className="text-white text-sm font-semibold uppercase tracking-wider font-display">
+              Screening Services
+            </h4>
+            <ul className="space-y-2 text-xs">
+              <li>
+                <Link to="/" className="hover:text-white transition-colors">
+                  Overview & Gateway
+                </Link>
+              </li>
+              <li>
+                <Link to="/tenant-background-check" className="hover:text-white transition-colors">
+                  Tenant Background Checks
+                </Link>
+              </li>
+              <li>
+                <Link to="/transunion-credit-check" className="hover:text-white transition-colors">
+                  TransUnion® Credit Check
+                </Link>
+              </li>
+              <li>
+                <Link to="/reliable-credit-score" className="hover:text-white transition-colors">
+                  $1 Credit Report & Score
+                </Link>
+              </li>
+              <li>
+                <Link to="/truthfinder-criminal-search" className="hover:text-white transition-colors">
+                  TruthFinder Criminal Search
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 3: Legal & Compliance */}
           <div className="space-y-3">
             <h4 className="text-white text-sm font-semibold uppercase tracking-wider font-display">
               Legal & Privacy
             </h4>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="space-y-2 text-xs">
               <li>
                 <button
                   onClick={() => onOpenLegal('privacy')}
@@ -74,7 +109,7 @@ export const Footer: React.FC<FooterProps> = ({
                   href="https://www.ftc.gov/business-guidance/resources/using-consumer-reports-what-landlords-need-know" 
                   target="_blank" 
                   rel="noreferrer" 
-                  className="text-xs text-slate-500 hover:text-slate-400 block pt-1"
+                  className="text-slate-500 hover:text-slate-400 block pt-1"
                 >
                   FTC Landlord Guidance ↗
                 </a>
@@ -82,20 +117,20 @@ export const Footer: React.FC<FooterProps> = ({
             </ul>
           </div>
 
-          {/* Col 3: Contact & Settings */}
+          {/* Col 4: Contact & Settings */}
           <div className="space-y-3">
             <h4 className="text-white text-sm font-semibold uppercase tracking-wider font-display">
               Contact Desk
             </h4>
-            <ul className="space-y-2.5 text-sm text-slate-400">
+            <ul className="space-y-2.5 text-xs text-slate-400">
               <li>
-                <span className="block text-xs text-slate-500">Inquiries</span>
+                <span className="block text-[11px] text-slate-500">Inquiries</span>
                 <a href="mailto:support@verifyapplicant.com" className="hover:text-white transition-colors">
                   support@{currentDomain.toLowerCase()}
                 </a>
               </li>
               <li>
-                <span className="block text-xs text-slate-500">Compliance & FCRA Desk</span>
+                <span className="block text-[11px] text-slate-500">Compliance & FCRA Desk</span>
                 <a href="mailto:compliance@verifyapplicant.com" className="hover:text-white transition-colors">
                   compliance@{currentDomain.toLowerCase()}
                 </a>
@@ -106,7 +141,7 @@ export const Footer: React.FC<FooterProps> = ({
                   className="inline-flex items-center gap-1.5 text-xs text-blue-400 hover:text-blue-300 bg-blue-950/50 px-2.5 py-1.5 rounded-lg border border-blue-900/50 transition-colors cursor-pointer"
                 >
                   <Settings className="w-3.5 h-3.5" />
-                  <span>Configure Portal Destination Link</span>
+                  <span>Configure Destination Links</span>
                 </button>
               </li>
             </ul>
@@ -115,7 +150,7 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
 
         {/* Referral & Partner Disclosure Box */}
-        <div className="py-8 border-b border-slate-900 text-xs text-slate-500 leading-relaxed bg-slate-900/40 px-6 my-6 rounded-2xl border border-slate-800/60">
+        <div className="py-6 border-b border-slate-900 text-xs text-slate-500 leading-relaxed bg-slate-900/40 px-6 my-6 rounded-2xl border border-slate-800/60">
           <p className="font-semibold text-slate-400 mb-1">Referral Disclosure & FCRA Notice:</p>
           <p>
             {currentDomain} operates as an independent referral portal. We do not directly assemble consumer reports, perform courthouse lookups, or act as a Consumer Reporting Agency (CRA) under the Fair Credit Reporting Act. When you initiate screening via our "Start Background Check" buttons, you are transferred securely to an authorized accredited third-party screening provider (such as Whitebridge or authorized screening networks). This site operator may receive referral compensation for screening purchases made through partner links. All report accuracy, dispute handling, and compliance responsibilities reside exclusively with the accredited partner CRA.
@@ -123,7 +158,7 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
 
         {/* Copyright & Bottom Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4 pt-4">
+        <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4 pt-2">
           <p>© {currentYear} {currentDomain}. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <span>SOC-2 Aligned Clearinghouse</span>

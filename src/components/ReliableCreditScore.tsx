@@ -7,13 +7,11 @@ import {
   CheckCircle2, 
   EyeOff, 
   Sparkles, 
-  AlertCircle, 
   HelpCircle,
-  FileCheck2,
   TrendingUp,
-  Search,
   DollarSign
 } from 'lucide-react';
+import { SEOHead } from './SEOHead';
 
 interface ReliableCreditScoreProps {
   onStartClick: () => void;
@@ -22,29 +20,35 @@ interface ReliableCreditScoreProps {
 
 export const ReliableCreditScore: React.FC<ReliableCreditScoreProps> = ({
   onStartClick,
-  reliableCreditUrl,
 }) => {
   return (
-    <div className="bg-slate-50 min-h-screen">
+    <div className="bg-slate-50 min-h-screen font-sans">
+      <SEOHead
+        title="Access $1 Credit Report & Score | Reliable Credit Monitoring"
+        description="Get instant access to your 3-bureau credit score and complete credit report for just $1. Monitor credit health, track inquiries, and verify financial standing."
+        canonicalUrl="https://www.whitebridgefind.com/reliable-credit-score"
+      />
+
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-white pt-16 pb-20 sm:pt-24 sm:pb-28 border-b border-slate-100">
         <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-60" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto animate-in fade-in slide-in-from-top-4 duration-300">
+          <div className="text-center max-w-4xl mx-auto animate-in fade-in slide-in-from-top-4 duration-300">
+            
             {/* Tag */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-800 text-xs font-semibold mb-6 shadow-xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-800 text-xs font-semibold mb-6 shadow-xs">
               <DollarSign className="w-3.5 h-3.5 text-blue-600 shrink-0" />
               <span>Premium $1.00 Trial Access Campaign</span>
             </div>
 
-            {/* Headline */}
-            <h1 className="text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.1] mb-6 font-display">
-              <span className="text-blue-600 underline decoration-blue-100 decoration-4 underline-offset-8">Access $1 Credit report</span>
+            {/* H1 Headline */}
+            <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.15] mb-6 font-display">
+              Access Your <span className="text-blue-600 underline decoration-blue-100 decoration-4 underline-offset-8">$1 Credit Report & Reliable Credit Score</span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-lg sm:text-xl text-slate-600 leading-relaxed font-normal mb-8 max-w-2xl mx-auto">
-              Unlock your complete credit profile, credit scores, and comprehensive multi-bureau reports instantly. Secure soft inquiry protection prevents any score damage.
+            <p className="text-lg sm:text-xl text-slate-600 leading-relaxed font-normal mb-8 max-w-3xl mx-auto">
+              Unlock your complete 3-bureau credit profile, real-time credit scores, and daily monitoring alerts for just $1.00. Built with soft inquiry protection to ensure your credit rating is never damaged.
             </p>
 
             {/* CTA Button Grid */}
@@ -53,7 +57,7 @@ export const ReliableCreditScore: React.FC<ReliableCreditScoreProps> = ({
                 onClick={onStartClick}
                 className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-2xl shadow-lg shadow-blue-600/20 hover:shadow-blue-600/30 active:scale-[0.99] transition-all flex items-center justify-center gap-2 group cursor-pointer text-base"
               >
-                <span>Access $1 Credit report</span>
+                <span>Access $1 Credit Report Now</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
@@ -62,19 +66,20 @@ export const ReliableCreditScore: React.FC<ReliableCreditScoreProps> = ({
             <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs text-slate-400 font-medium font-mono">
               <span className="flex items-center gap-1.5">
                 <Lock className="w-3.5 h-3.5 text-slate-400" />
-                Secure SSL Encrypted Connection
+                Secure 256-Bit SSL Encryption
               </span>
               <span className="w-1.5 h-1.5 rounded-full bg-slate-300 hidden sm:inline" />
               <span className="flex items-center gap-1.5">
                 <EyeOff className="w-3.5 h-3.5 text-slate-400" />
-                Soft Credit Pull (No Score Impact)
+                Soft Credit Pull (Zero Score Harm)
               </span>
               <span className="w-1.5 h-1.5 rounded-full bg-slate-300 hidden sm:inline" />
               <span className="flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-slate-400" />
-                3-Bureau Coverage Available
+                Equifax, Experian & TransUnion Included
               </span>
             </div>
+
           </div>
         </div>
       </section>
@@ -82,29 +87,30 @@ export const ReliableCreditScore: React.FC<ReliableCreditScoreProps> = ({
       {/* Trial Value Proposition Bento Grid */}
       <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
+          <span className="text-xs font-bold uppercase tracking-widest text-blue-600 font-mono block mb-2">
+            Complete Financial Visibility
+          </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-display mb-4">
             What is Included in Your $1 Credit Pack?
           </h2>
-          <p className="text-base sm:text-lg text-slate-500 max-w-2xl mx-auto">
+          <p className="text-base text-slate-500 max-w-2xl mx-auto">
             Review detailed financial records, score histories, and monitoring parameters with absolute clarity.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Card 1 */}
           <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-xs hover:shadow-md transition-all">
             <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mb-6">
               <CreditCard className="w-6 h-6" />
             </div>
             <h3 className="text-lg font-bold text-slate-900 mb-3 font-display">
-              Complete Credit Scores
+              3-Bureau Credit Scores
             </h3>
             <p className="text-sm text-slate-600 leading-relaxed">
-              Verify your premium credit score quickly. Our secure partners compile details from key bureaus to provide your accurate status.
+              Verify your multi-bureau credit scores instantly. Our accredited partners compile data from Equifax, Experian, and TransUnion.
             </p>
           </div>
 
-          {/* Card 2 */}
           <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-xs hover:shadow-md transition-all">
             <div className="w-12 h-12 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center mb-6">
               <TrendingUp className="w-6 h-6" />
@@ -113,20 +119,19 @@ export const ReliableCreditScore: React.FC<ReliableCreditScoreProps> = ({
               Credit Score Simulator
             </h3>
             <p className="text-sm text-slate-600 leading-relaxed">
-              Find out how paying off balances, opening new lines of credit, or resolving late items would impact your scores in real time.
+              Model how paying off credit balances, opening new lines of credit, or resolving late payment items will change your credit scores in real time.
             </p>
           </div>
 
-          {/* Card 3 */}
           <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-xs hover:shadow-md transition-all">
             <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-6">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <h3 className="text-lg font-bold text-slate-900 mb-3 font-display">
-              Daily Credit Monitoring
+              Daily Credit Alerts
             </h3>
             <p className="text-sm text-slate-600 leading-relaxed">
-              Gain peace of mind with continuous oversight of your credit report. Get notified instantly of critical modifications or new accounts.
+              Protect your identity with 24/7 credit oversight. Receive immediate alerts whenever new accounts, inquiries, or public records appear.
             </p>
           </div>
         </div>
@@ -138,13 +143,13 @@ export const ReliableCreditScore: React.FC<ReliableCreditScoreProps> = ({
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-blue-600 font-mono block mb-3">
-                Industry-Grade Reports
+                Accredited 3-Bureau Reports
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-display mb-6">
-                Accurate Vetting Files to Rent, Borrow, or Build
+                Accurate Credit Files to Rent, Borrow, or Build Credibility
               </h2>
               <p className="text-slate-600 mb-8 leading-relaxed">
-                Whether you need a pristine credit score file to qualify for your dream apartment, apply for credit cards, or check for potential identity theft issues, our partner reports provide bank-grade credibility.
+                Whether you need a pristine credit score file to qualify for your dream apartment lease, apply for mortgage loans, or protect yourself against identity theft, our partner reports provide bank-grade accuracy and transparency.
               </p>
 
               <div className="space-y-4">
@@ -152,23 +157,23 @@ export const ReliableCreditScore: React.FC<ReliableCreditScoreProps> = ({
                   <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                   <div>
                     <h4 className="text-sm font-bold text-slate-900">Soft Inquiry Protections</h4>
-                    <p className="text-xs text-slate-500">Checking your own score never results in a negative score drop.</p>
+                    <p className="text-xs text-slate-500">Checking your own score never results in a negative credit rating drop.</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="text-sm font-bold text-slate-900">3-Bureau Analysis Data</h4>
-                    <p className="text-xs text-slate-500">Includes details from Equifax, Experian, and TransUnion records.</p>
+                    <h4 className="text-sm font-bold text-slate-900">Comprehensive 3-Bureau Data</h4>
+                    <p className="text-xs text-slate-500">Includes detailed reports from Equifax, Experian, and TransUnion records.</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
                   <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="text-sm font-bold text-slate-900">Simple Cancel Anytime</h4>
-                    <p className="text-xs text-slate-500">Cancel the trial online easily or continue monitoring with full benefits.</p>
+                    <h4 className="text-sm font-bold text-slate-900">Easy Online Cancellation</h4>
+                    <p className="text-xs text-slate-500">Cancel your trial online easily at any time or continue monitoring with full benefits.</p>
                   </div>
                 </div>
               </div>
@@ -211,7 +216,7 @@ export const ReliableCreditScore: React.FC<ReliableCreditScoreProps> = ({
                   onClick={onStartClick}
                   className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl transition-all shadow-md shadow-blue-600/10 flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  <span>Access $1 Credit report</span>
+                  <span>Access $1 Credit Report</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
@@ -282,7 +287,7 @@ export const ReliableCreditScore: React.FC<ReliableCreditScoreProps> = ({
             onClick={onStartClick}
             className="bg-blue-500 hover:bg-blue-400 text-slate-950 font-extrabold px-8 py-4 rounded-xl shadow-lg shadow-blue-500/10 hover:shadow-blue-500/20 active:scale-[0.99] transition-all flex items-center gap-2 mx-auto cursor-pointer"
           >
-            <span>Access $1 Credit report</span>
+            <span>Access $1 Credit Report</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>
