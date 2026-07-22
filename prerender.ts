@@ -30,10 +30,17 @@ const PAGE_METADATA: Record<string, { title: string; description: string; canoni
     heading: "Reliable Credit Score & Financial Stability Analysis for Landlords",
     excerpt: "Analyze tenant debt-to-income ratios, revolving credit lines, payment punctuality, and financial court judgments to make confident leasing decisions."
   },
+  "/truthfinder-criminal-search": {
+    title: "TruthFinder Criminal Search & Public Records | White Bridge Find",
+    description: "Comprehensive TruthFinder criminal search and public records lookup. Verify address histories, contact info, aliases, and public registry details.",
+    canonical: "https://www.whitebridgefind.com/truthfinder-criminal-search",
+    heading: "TruthFinder Public Records & Criminal Search Portal",
+    excerpt: "Perform thorough background investigations including address histories, alias cross-referencing, contact verifications, and public court records."
+  },
   "/truthfinder-search": {
-    title: "TruthFinder Background Search & Public Records | White Bridge Find",
-    description: "Comprehensive TruthFinder public records search. Verify address histories, contact info, aliases, and public registry details.",
-    canonical: "https://www.whitebridgefind.com/truthfinder-search",
+    title: "TruthFinder Criminal Search & Public Records | White Bridge Find",
+    description: "Comprehensive TruthFinder criminal search and public records lookup. Verify address histories, contact info, aliases, and public registry details.",
+    canonical: "https://www.whitebridgefind.com/truthfinder-criminal-search",
     heading: "TruthFinder Public Records & Criminal Search Portal",
     excerpt: "Perform thorough background investigations including address histories, alias cross-referencing, contact verifications, and public court records."
   },

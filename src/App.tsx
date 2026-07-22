@@ -233,6 +233,15 @@ function MainApp() {
             } 
           />
           <Route 
+            path="/truthfinder-search" 
+            element={
+              <TruthFinderSearch 
+                onStartClick={handleStartTruthfinderSearch} 
+                truthfinderUrl={truthfinderUrl} 
+              />
+            } 
+          />
+          <Route 
             path="/guides" 
             element={
               <GuidesHub 

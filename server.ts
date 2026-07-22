@@ -24,10 +24,15 @@ const PAGE_METADATA: Record<string, { title: string; description: string; canoni
     description: "Analyze prospective tenant credit scores, trade line debt, payment punctuality, and financial court judgments for rental applicant screening.",
     canonical: "https://www.whitebridgefind.com/reliable-credit-score"
   },
+  "/truthfinder-criminal-search": {
+    title: "TruthFinder Criminal Search & Public Records | White Bridge Find",
+    description: "Comprehensive TruthFinder criminal search and public records lookup. Verify address histories, contact info, aliases, and public registry details.",
+    canonical: "https://www.whitebridgefind.com/truthfinder-criminal-search"
+  },
   "/truthfinder-search": {
-    title: "TruthFinder Background Search & Public Records | White Bridge Find",
-    description: "Comprehensive TruthFinder public records search. Verify address histories, contact info, aliases, and public registry details.",
-    canonical: "https://www.whitebridgefind.com/truthfinder-search"
+    title: "TruthFinder Criminal Search & Public Records | White Bridge Find",
+    description: "Comprehensive TruthFinder criminal search and public records lookup. Verify address histories, contact info, aliases, and public registry details.",
+    canonical: "https://www.whitebridgefind.com/truthfinder-criminal-search"
   },
   "/guides": {
     title: "Landlord Resource Center & Tenant Screening Educational Guides (2026)",
